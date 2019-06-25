@@ -41,6 +41,7 @@ public class Ray {
         if (direction==ray.getDirection()&&head==ray.getHead())
             return true;
         return false;
+
     }
 
     @Override
