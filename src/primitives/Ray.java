@@ -16,6 +16,8 @@ public class Ray {
         return new Vector(direction);
     }
 
+
+
     public void setDirection(Vector direction) {
         this.direction = direction;
     }
