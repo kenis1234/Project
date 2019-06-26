@@ -1,3 +1,4 @@
+//Bs"d
 package geometries;
 
 import primitives.Point3D;
@@ -14,28 +15,29 @@ public class Plane extends Geometry {
     public Plane(Point3D point, Vector plumb) {
         this.point = point;
         this.plumb = plumb;
-    }
-    public Plane(Point3D point1, Point3D point2, Point3D point3)
+    }                      // Constructor that initializing the plane by point and the plumb vector
+    public Plane(Point3D point1, Point3D point2, Point3D point3)         // Constructor that initializes the plane by three points
     {
         point=point1;
-        plumb=(point1.sub(point2)).crossProduct(point1.sub(point3));
+        plumb=(point1.sub(point2)).crossProduct(point1.sub(point3)); // Produces the plumb vector by a cross product of two vectors created between the three points
     }
 
 
     /************** Getters/Setters *******/
     public Point3D getPoint() {
         return point;
-    }
+    }                          // Return the point of the Plane
 
     public Vector getPlumb() {
         return plumb;
-    }
+    }                           // Return the vector plumb of the Plane
+
 
     /************** Operations ***************/
     @Override
     public Vector getNormal(Point3D point) {
         return new Vector(plumb.normalize());
-    }
+    }  // Return the normal of the Plane
 
     @Override
     public List<GeoPoint> findIntersections(Ray ray){
