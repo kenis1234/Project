@@ -54,4 +54,8 @@ public class Sphere extends RadialGeometry{
 
         return list;
     }
+
+    public void setshi(int i) {
+        this.material.setnShininess(20);
+    }
 }

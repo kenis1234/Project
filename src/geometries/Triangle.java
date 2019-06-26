@@ -81,4 +81,7 @@ public class Triangle extends Plane {
             return list;
         return new ArrayList<GeoPoint>();
     }
+    public void setshi(int i) {
+        this.material.setnShininess(20);
+    }
 }

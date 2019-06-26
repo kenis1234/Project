@@ -58,7 +58,7 @@ public class Render {
     private Color calcColor(GeoPoint geopoint) {
         Color color = scene.getAmbient().getIntensity(new Point3D(0, 0, 0));
         color = add(color, geopoint.geometry.getEmission());
-        /*Vector v = geopoint.point.sub(scene.getCamera().getP0()).normalize();
+        Vector v = geopoint.point.sub(scene.getCamera().getP0()).normalize();
         Vector n = geopoint.geometry.getNormal(geopoint.point);
         int nShininess = geopoint.geometry.getMaterial().getnShininess();
         double kd = geopoint.geometry.getMaterial().getkD();
@@ -69,7 +69,7 @@ public class Render {
                 Color lightIntensity = lightSource.getIntensity(geopoint.point);
                 color=add(add(color,calcDiffusive(kd, l, n, lightIntensity)),calcSpecular(ks, l, n, v, nShininess, lightIntensity));
             }
-        }*/
+        }
         return color;
     }
     private static final double EPS = 1.0;

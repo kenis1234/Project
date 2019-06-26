@@ -5,6 +5,27 @@ public class Material {
     private double kS;
     private double kR;
     private double kT;
+
+    public void setkD(double kD) {
+        this.kD = kD;
+    }
+
+    public void setkS(double kS) {
+        this.kS = kS;
+    }
+
+    public void setkR(double kR) {
+        this.kR = kR;
+    }
+
+    public void setkT(double kT) {
+        this.kT = kT;
+    }
+
+    public void setnShininess(int nShininess) {
+        this.nShininess = nShininess;
+    }
+
     private int nShininess;
 
 
