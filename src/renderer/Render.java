@@ -37,7 +37,7 @@ public class Render {
                 }
 
             }
-            printGrid(50);
+
             imageWriter.writeToimage();
     }
 
@@ -57,6 +57,8 @@ public class Render {
 
     private Color calcColor(GeoPoint geopoint) {
         Color color = scene.getAmbient().getIntensity(new Point3D(0, 0, 0));
+        System.out.println(color);
+        System.out.println( geopoint.geometry.getEmission());
         color = add(color, geopoint.geometry.getEmission());
         Vector v = geopoint.point.sub(scene.getCamera().getP0()).normalize();
         Vector n = geopoint.geometry.getNormal(geopoint.point);
@@ -67,6 +69,8 @@ public class Render {
             Vector l = lightSource.getL(geopoint.point);
             if ((n.dotProduct(l) * n.dotProduct(v) > 0)&&(unshaded(l, n, geopoint) )) {
                 Color lightIntensity = lightSource.getIntensity(geopoint.point);
+                System.out.println(calcDiffusive(kd, l, n, lightIntensity));
+                System.out.println(calcSpecular(ks, l, n, v, nShininess, lightIntensity));
                 color=add(add(color,calcDiffusive(kd, l, n, lightIntensity)),calcSpecular(ks, l, n, v, nShininess, lightIntensity));
             }
         }
@@ -75,11 +79,13 @@ public class Render {
 
     private static final double EPS = 1.0;
     private boolean unshaded(Vector l, Vector n, GeoPoint geopoint) {
-        Vector lightDirection = l.mult(-1); // from point to light source
+        Vector lightDirection = l.mult(1); // from point to light source
         Vector epsVector = n.mult(n.dotProduct(lightDirection) > 0 ? EPS : -EPS);
         Point3D point = geopoint.point.add(epsVector);
         Ray lightRay = new Ray(lightDirection,point);
+
         List<GeoPoint> intersections = scene.getGeometries().findIntersections(lightRay);
+
         return intersections.isEmpty();
     }
 
@@ -108,7 +114,7 @@ public class Render {
         l.normalize();
         n.normalize();
         double k=kd*(abs(l.dotProduct(n)));
-        return new Color((int)(lightIntensity.getRGB()*k));
+        return (mult(lightIntensity,k));
     }
 
 
@@ -117,12 +123,12 @@ public class Render {
         v.normalize();
         n.normalize();
         l.normalize();
-        Vector n1=new Vector(n);
-        Vector r=new Vector(l.sub(n1.mult(2*(l.dotProduct(n1)))));
-        Vector v1=new Vector(v);
+        Vector n1 = new Vector(n);
+        Vector r = new Vector(l.sub(n1.mult(2 * (l.dotProduct(n1)))));
+        Vector v1 = new Vector(v);
         v1.mult(-1);
-        double k=max(0,ks*(pow(v1.dotProduct(r),nShininess)));
-        return new Color((int)(lightIntensity.getRGB()*k));
+        double k = max(0, ks * (pow(v1.dotProduct(r), nShininess)));
+        return (mult(lightIntensity, k));
     }
 
 
@@ -141,6 +147,16 @@ public class Render {
 
         return minDistancePoint;
     }
+
+    public Color mult(Color color, double ka){
+        double d=color.getRGB();
+        int r=(int)(color.getRed()*ka);
+        int g=(int)(color.getGreen()*ka);
+        int b=(int)(color.getBlue()*ka);
+        return new Color(r,g,b);
+    }
+
+
     private Color add (Color a,Color b){
         int r=min(255,a.getRed()+b.getRed());
         int g=min(255,a.getGreen()+b.getGreen());

@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 import primitives.Point3D;
 import primitives.Vector;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 import static junit.framework.TestCase.fail;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class VectorTests {
