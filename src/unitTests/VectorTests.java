@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import primitives.Point3D;
 import primitives.Vector;
 
+import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,7 +17,7 @@ public class VectorTests {
         Vector v2=new Vector(new Point3D(0.0,3,2.0));
         Vector v3=new Vector(v1.add(v2));
         assertEquals("Vector{head=Point3D{x=1.0, y=5.0, z=6.0}}",v3.toString());
-            /*v2=new Vector();
+            v2=new Vector();
             try
             {
                 v2.add(v2);
@@ -24,7 +26,7 @@ public class VectorTests {
             catch (Exception ex)
             {
             assertTrue(true);
-        }/
+        }
 
     }
 
@@ -142,7 +144,7 @@ public class VectorTests {
             fail("Didn't throw divide by zero exception!");
         } catch (ArithmeticException e) {
             assertTrue(true);
-        }/
+        }
     }*/
 }
 

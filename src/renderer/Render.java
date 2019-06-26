@@ -72,6 +72,7 @@ public class Render {
         }
         return color;
     }
+
     private static final double EPS = 1.0;
     private boolean unshaded(Vector l, Vector n, GeoPoint geopoint) {
         Vector lightDirection = l.mult(-1); // from point to light source

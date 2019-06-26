@@ -23,7 +23,7 @@ public abstract class Geometry implements Intersectable {
     }
 
     public void setEmission(Color emission) {
-        this.emission = emission;
+        this.emission = new Color(emission.getRGB());
     }
 
 

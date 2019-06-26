@@ -61,6 +61,7 @@ public class ColorTests {
     public void spotLightTest2(){
 
         Scene scene = new Scene("");
+        scene.setAmbient(new AmbientLight(new Color(102, 12, 99),0.3));
         scene.setCameraAndDistance(new Camera(),200);
         Sphere sphere = new Sphere(500, new Point3D(0.0, 0.0, -1000));
         sphere.setMaterial(new Material(1,1,1,1,20));
