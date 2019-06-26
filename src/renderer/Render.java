@@ -15,8 +15,8 @@ import static geometries.Intersectable.GeoPoint;
 import static java.lang.Math.*;
 
 public class Render {
-    private ImageWriter imageWriter;
-    private Scene scene;
+    public ImageWriter imageWriter;
+    public Scene scene;
 
     public Render(ImageWriter i, Scene s){
         imageWriter=i;

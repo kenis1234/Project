@@ -44,7 +44,7 @@ public class PlaneTest {
 
     }
 
-    @Test
+    /*@Test
     void func3() {
         Plane p=new Plane(new Point3D(30, 0,0),new Point3D(5,1,1),new Point3D(100,1,0));
         Vector v=new Vector(1,2,0);
@@ -56,5 +56,5 @@ public class PlaneTest {
 
         assertEquals(flag,true);
 
-    }
+    }*/
 }

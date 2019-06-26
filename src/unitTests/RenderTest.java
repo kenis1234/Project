@@ -1,5 +1,7 @@
 package unitTests;
 
+import elements.AmbientLight;
+import elements.Camera;
 import geometries.Sphere;
 import geometries.Triangle;
 import org.junit.Test;
@@ -7,6 +9,8 @@ import primitives.Point3D;
 import renderer.ImageWriter;
 import renderer.Render;
 import scene.Scene;
+
+import java.awt.*;
 
 public class RenderTest {
     @Test
@@ -25,13 +29,19 @@ public class RenderTest {
 
     @Test
     public void f1(){
-        Triangle t1=new Triangle(new Point3D(20,-20,20),new Point3D(20,-20,0),new Point3D(0,-20,20));
-        Triangle t2=new Triangle(new Point3D(-20,-20,20),new Point3D(0,-20,20),new Point3D(-20,-20,0));
-        Triangle t3=new Triangle(new Point3D(0,-20,-20),new Point3D(-20,-20,-20),new Point3D(-20,-20,0));
-        Triangle t4=new Triangle(new Point3D(0,-20,-20),new Point3D(20,-20,-20),new Point3D(20,-20,0));
-        Sphere s=new Sphere(14.14,new Point3D(0,-20,0));
-        Scene scene=new Scene("ambient");
-        String imageName="ambient";
+        //Triangle t1=new Triangle(new Point3D(200,-200,200),new Point3D(200,-200,0),new Point3D(0,-200,200));
+        //Triangle t2=new Triangle(new Point3D(-200,-200,200),new Point3D(0,-200,200),new Point3D(-200,-200,0));
+        //Triangle t3=new Triangle(new Point3D(0,-200,-200),new Point3D(-200,-200,-200),new Point3D(-200,-200,0));
+        //Triangle t4=new Triangle(new Point3D(0,-200,-200),new Point3D(200,-200,-200),new Point3D(200,-200,0));
+        //Sphere s=new Sphere(141.4,new Point3D(0,-20,0));
+        //Triangle t1=new Triangle(new Point3D(-200,0,-200),new Point3D(-200,-200,-200),new Point3D(0,-200,-200));
+        Triangle t1=new Triangle(new Point3D(200,200,-200),new Point3D(200,0,-200),new Point3D(0,200,-200));
+        Triangle t2=new Triangle(new Point3D(-200,200,-200),new Point3D(0,200,-200),new Point3D(-200,0,-200));
+        Triangle t3=new Triangle(new Point3D(0,-200,-200),new Point3D(-200,-200,-200),new Point3D(-200,0,-200));
+        Triangle t4=new Triangle(new Point3D(0,-200,-200),new Point3D(200,-200,-200),new Point3D(200,-0,-200));
+        Sphere s=new Sphere(100,new Point3D(0,0,-200));
+        Scene scene=new Scene("ambient1");
+        String imageName="ambient1";
         double width=500;
         double height=500;
         int nX=500;
@@ -42,6 +52,9 @@ public class RenderTest {
         scene.addGeometry(t3);
         scene.addGeometry(t4);
         scene.addGeometry(s);
+        scene.setBackground(new Color(255,51,204));
+        scene.setAmbient(new AmbientLight(new Color(26, 65, 10),1));
+        scene.setCameraAndDistance(new Camera(),100);
         Render r=new Render(im,scene);
         r.renderImage();
     }

@@ -4,11 +4,12 @@ import org.junit.jupiter.api.Test;
 import primitives.Point3D;
 import primitives.Vector;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class VectorTests {
-    @Test
+    /*@Test
     void add() {
         Vector v1=new Vector(new Point3D(1.0,2.0,4));
         Vector v2=new Vector(new Point3D(0.0,3,2.0));
@@ -23,7 +24,7 @@ public class VectorTests {
             catch (Exception ex)
             {
             assertTrue(true);
-        }*/
+        }/
 
     }
 
@@ -42,7 +43,7 @@ public class VectorTests {
         catch (Exception ex)
         {
             assertTrue(true);
-        }*/
+        }/
     }
 
     @Test
@@ -58,7 +59,7 @@ public class VectorTests {
         catch (Exception ex)
         {
             assertTrue(true);
-        }*/
+        }/
     }
 
     @Test
@@ -101,7 +102,7 @@ public class VectorTests {
         catch (Exception ex)
         {
             assertTrue(true);
-        }*/
+        }/
         v1=new Vector(new Point3D(1.0,2.0,3.0));
         v2=new Vector(new Point3D(-1.0,-2.0,-3.0));
         /*try {
@@ -111,7 +112,7 @@ public class VectorTests {
         catch (Exception ex)
         {
             assertTrue(true);
-        }*/
+        }/
         v1=new Vector(new Point3D(2.0,2.0,3.0));
         v2=new Vector(new Point3D(-1.0,2.0,-3.0));
         v3=v1.crossProduct(v2);
@@ -141,8 +142,8 @@ public class VectorTests {
             fail("Didn't throw divide by zero exception!");
         } catch (ArithmeticException e) {
             assertTrue(true);
-        }*/
-    }
+        }/
+    }*/
 }
 
 

@@ -68,6 +68,8 @@ public class Triangle extends Plane {
         n3.div(n3.size());
         List<GeoPoint> list=new ArrayList<GeoPoint>();
         list=super.findIntersections(ray);
+        if(list.isEmpty())
+            return list;
         Point3D p=list.get(0).point;
         double i1=(p.sub(p0)).dotProduct(n1);
         double i2=(p.sub(p0)).dotProduct(n2);

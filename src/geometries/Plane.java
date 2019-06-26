@@ -44,7 +44,7 @@ public class Plane extends Geometry {
         Point3D q0=point;
         Vector v=new Vector(ray.getDirection());
         Point3D p0=new Point3D(ray.getHead());
-        if(n.dotProduct(v)>0)
+        if(n.dotProduct(v)==0)
             return list;
         Vector l=p0.sub(q0);
         l.div(n.dotProduct(v));

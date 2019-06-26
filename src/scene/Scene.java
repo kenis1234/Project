@@ -27,6 +27,7 @@ public class Scene {
         this.name = name;
         this.geometries = new Geometries();
         this.lights=new ArrayList<LightSource>();
+        distance=100;
     }
 
 
