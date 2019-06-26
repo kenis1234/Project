@@ -9,11 +9,10 @@ import primitives.Vector;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TriangleTest {
-   /* Triangle triangle = new Triangle(
+    Triangle triangle = new Triangle(
             new Point3D(0.0,1.0,0.0),
             new Point3D(1.0,0.0,0.0),
             new Point3D(0.0,0.0,1.0));
@@ -59,5 +58,5 @@ public class TriangleTest {
 
         assertEquals(flag, true);
     }
-*/
+
 }

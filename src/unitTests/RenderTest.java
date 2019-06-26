@@ -29,12 +29,6 @@ public class RenderTest {
 
     @Test
     public void f1(){
-        //Triangle t1=new Triangle(new Point3D(200,-200,200),new Point3D(200,-200,0),new Point3D(0,-200,200));
-        //Triangle t2=new Triangle(new Point3D(-200,-200,200),new Point3D(0,-200,200),new Point3D(-200,-200,0));
-        //Triangle t3=new Triangle(new Point3D(0,-200,-200),new Point3D(-200,-200,-200),new Point3D(-200,-200,0));
-        //Triangle t4=new Triangle(new Point3D(0,-200,-200),new Point3D(200,-200,-200),new Point3D(200,-200,0));
-        //Sphere s=new Sphere(141.4,new Point3D(0,-20,0));
-        //Triangle t1=new Triangle(new Point3D(-200,0,-200),new Point3D(-200,-200,-200),new Point3D(0,-200,-200));
         Triangle t1=new Triangle(new Point3D(200,200,-200),new Point3D(200,0,-200),new Point3D(0,200,-200));
         Triangle t2=new Triangle(new Point3D(-200,200,-200),new Point3D(0,200,-200),new Point3D(-200,0,-200));
         Triangle t3=new Triangle(new Point3D(0,-200,-200),new Point3D(-200,-200,-200),new Point3D(-200,0,-200));
