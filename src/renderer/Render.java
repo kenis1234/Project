@@ -37,6 +37,7 @@ public class Render {
                 }
 
             }
+            printGrid(50);
             imageWriter.writeToimage();
     }
 
@@ -56,8 +57,8 @@ public class Render {
 
     private Color calcColor(GeoPoint geopoint) {
         Color color = scene.getAmbient().getIntensity(new Point3D(0, 0, 0));
-        /*color = add(color, geopoint.geometry.getEmission());
-        Vector v = geopoint.point.sub(scene.getCamera().getP0()).normalize();
+        color = add(color, geopoint.geometry.getEmission());
+        /*Vector v = geopoint.point.sub(scene.getCamera().getP0()).normalize();
         Vector n = geopoint.geometry.getNormal(geopoint.point);
         int nShininess = geopoint.geometry.getMaterial().getnShininess();
         double kd = geopoint.geometry.getMaterial().getkD();
