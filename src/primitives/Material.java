@@ -17,6 +17,15 @@ public class Material {
         this.nShininess = nShininess;
     }      //constructor of material
 
+    public Material(Material material){
+        this.kD = material.getkD();
+        this.kS = material.getkS();
+        this.kR = material.getkR();
+        this.kT = material.getkT();
+        this.nShininess = material.getnShininess();
+    }                                                //copy constructor
+
+
 
     /************** Getters/Setters *******/
     public void setkD(double kD) {

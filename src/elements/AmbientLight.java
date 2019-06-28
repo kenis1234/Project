@@ -13,7 +13,6 @@ public class AmbientLight extends Light{
     }
 
 
-
     public Color getIntensity(Point3D t){
         double d=color.getRGB();
         int r=(int)(color.getRed()*ka);

@@ -42,17 +42,17 @@ public class Plane extends Geometry {
     @Override
     public List<GeoPoint> findIntersections(Ray ray){
         List<GeoPoint> list=new ArrayList<GeoPoint>();
-        Vector n=new Vector(plumb);
+        Vector n=new Vector(plumb);                           //the normal of te plane
         Point3D q0=point;
-        Vector v=new Vector(ray.getDirection());
+        Vector v=new Vector(ray.getDirection());                //direction of the ray
         Point3D p0=new Point3D(ray.getHead());
-        if(n.dotProduct(v)==0)
+        if(n.dotProduct(v)==0)                        //if ze anach lamishor
             return list;
         Vector l=p0.sub(q0);
         l.div(n.dotProduct(v));
-        double t=(n.mult(-1)).dotProduct(l);
+        double t=(n.mult(-1)).dotProduct(l);               //it is the calculation from the lecture
         Point3D p=p0.add(v.mult(t));
         list.add(new GeoPoint(this, p));
         return list;
-    }
+    }                      //find intersection point of ray with the plane
 }

@@ -11,54 +11,53 @@ public class Camera {
     private Vector vRight;
     private Vector vUp;
 
-
-    /*public Camera() {
-        p0=new Point3D(0,0,0);
-        vto=new Vector(1,0,0);
-        vRight=new Vector(0,-1,0);
-        vUp=new Vector(0,0,1);
-    }*/
-    public Camera()
-    {
+    /********** Constructors ***********/
+    public Camera() {
         p0=new Point3D(0,0,0);
         vto=new Vector(0,0,-1);
         vUp=new Vector(1,0,0);
         vRight=new Vector(0,1,0);
 
 
-    }
-    /*public Camera(Point3D p,Vector v1, Vector v2) {
-        p0=new Point3D(p);
-        vto=new Vector(v1);
-        vRight=new Vector(v1.crossProduct(v2));
-        vUp=new Vector(v2);
-        vto.normalize();
-        vRight.normalize();
-        vUp.normalize();
-    }*/
-    public Camera(Point3D P0, Vector vUp, Vector vTo)
-    {
+    }                //default constructor
+
+    public Camera(Point3D P0, Vector vUp, Vector vTo) {
         p0=new Point3D(P0);
         vto=new Vector(vTo);
         vUp=new Vector(vUp);
         vRight=new Vector(vTo.crossProduct(vUp));
-    }
+        vto.normalize();
+        vUp.normalize();
+        vRight.normalize();
+    }   //regular constructor
 
 
-
+    /************** Getters/Setters *******/
     public Point3D getP0() {
         return new Point3D(p0);
-    }
+    }           //get the point of the camera
+
     public Vector getvto() {
         return new Vector(vto);
-    }
+    }           //get the toward vector
+
     public Vector getvRight() {
         return new Vector(vRight);
-    }
+    }           //get the right vector
+
     public Vector getvUp() {
         return new Vector(vUp);
-    }
+    }           //get the up vector
 
+
+    /************** Operations ***************/
+    //constructing ray throw some pixel
+    //x,y- the number of the pixel
+    //w- the width of the image
+    //h- the height of the image
+    //px-number of pixels in the x
+    //py- number of pixels in y
+    //d- the distance of the plane from the camera
     public Ray constructRayThroughPixel (double x, double y, double w,double h,int px,int py, double d){
         System.out.println("adsrg");
         Point3D p2=new Point3D(p0);
@@ -66,7 +65,7 @@ public class Camera {
         System.out.println(to);
         System.out.println(d);
         to.mult(d);
-        Point3D pc=p2.add(to);
+        Point3D pc=p2.add(to);         //pc-pc of the lectures
         System.out.println(p0);
         System.out.println(to);
         System.out.println(pc);
@@ -76,12 +75,11 @@ public class Camera {
         double ty=(y-py/2.0)*ry-ry/2.0;
         System.out.println(tx);
         System.out.println(ty);
-        Vector vx= getvRight().mult(tx);
-        Vector vy=new Vector(getvUp().mult(ty*(-1)));
+        Vector vx= getvRight().mult(tx);             //how much move in x
+        Vector vy=new Vector(getvUp().mult(ty*(-1)));//how much move in y
         Point3D p=(pc.add(vx)).add(vy);
         Vector res=p.sub(p0);
         res.normalize();
         return new Ray(res,p0);
     }
-
 }
