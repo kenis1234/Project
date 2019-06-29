@@ -15,9 +15,6 @@ public class AmbientLight extends Light{
 
     /************** Operations ***************/
     public Color getIntensity(Point3D t){
-        int r=(int)(color.getRed()*ka);
-        int g=(int)(color.getGreen()*ka);
-        int b=(int)(color.getBlue()*ka);
-        return new Color(r,g,b);
-    }
+        return mult(color,ka);
+    }    //calculating the color
 }
