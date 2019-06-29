@@ -59,7 +59,6 @@ public class Camera {
     //py- number of pixels in y
     //d- the distance of the plane from the camera
     public Ray constructRayThroughPixel (double x, double y, double w,double h,int px,int py, double d){
-        System.out.println("adsrg");
         Point3D p2=new Point3D(p0);
         Vector to=new Vector(getvto());
         System.out.println(to);

@@ -6,7 +6,7 @@ import primitives.Vector;
 import java.awt.*;
 
 public interface LightSource {
-    public Color getIntensity(Point3D p);
-    public Vector getL(Point3D p);
-    public Vector getD(Point3D p);
+    public Color getIntensity(Point3D p);               //get the calculation of the color
+    public Vector getL(Point3D p);                      //returns the direction of the light
+    public Vector getD(Point3D p);                      //I don't know
 }
