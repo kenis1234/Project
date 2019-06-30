@@ -1,3 +1,4 @@
+// Bs"d
 package primitives;
 
 import static primitives.Util.*;
@@ -30,7 +31,7 @@ public final class Coordinate {
         if (obj == null) return false;
         if (!(obj instanceof Coordinate)) return false;
         return usubtract(_coord, ((Coordinate)obj)._coord) == 0.0;
-    }
+    } // Checks whether two coordinates are equal
 
     @Override
     public String toString() {
@@ -40,18 +41,18 @@ public final class Coordinate {
     /************** Operations ***************/
     public Coordinate subtract(Coordinate other) {
         return new Coordinate(usubtract(_coord, other._coord));
-    }
+    } // Performs subtraction between coordinates
 
     public Coordinate add(Coordinate other) {
         return new Coordinate(uadd(_coord, other._coord));
-    }
+    } // Performs add between coordinates
 
     public Coordinate scale(double num) {
         return new Coordinate(uscale(_coord, num));
-    }
+    } // Multiply the coordinate in scale
 
     public double multiply(Coordinate other) {
         return uscale(_coord, other._coord);
-    }
+    } // Multiply the coordinate in other coordinate
 
 }

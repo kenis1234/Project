@@ -1,4 +1,5 @@
 //Bs"d
+
 package primitives;
 
 public class Ray {
@@ -16,8 +17,6 @@ public class Ray {
     public Vector getDirection() {
         return new Vector(direction);
     }                                // Return the vector direction of the Ray
-
-
 
     public void setDirection(Vector direction) {
         this.direction = direction;

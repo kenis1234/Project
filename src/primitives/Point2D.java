@@ -1,3 +1,5 @@
+// Bs"d
+
 package primitives;
 
 public class Point2D {
@@ -9,12 +11,12 @@ public class Point2D {
     public Point2D(Coordinate coordinate_x, Coordinate coordinate_y) {
         this.coordinate_x=new Coordinate(coordinate_x);
         this.coordinate_y=new Coordinate(coordinate_y);
-    }  //counstruct point by 3 coordinates
+    }  //counstruct point by 2 coordinates
 
     public Point2D(double coordinate_x, double coordinate_y) {
         this.coordinate_x = new Coordinate(coordinate_x);
         this.coordinate_y = new Coordinate(coordinate_y);
-    }          //counstruct point by 3 doubles(coordinates)
+    }          //counstruct point by 2 doubles(coordinates)
 
 
     /************** Getters/Setters *******/
@@ -78,5 +80,5 @@ public class Point2D {
     public double size(Point2D point){
         double size=point.getCoordinate_x().multiply(point.getCoordinate_x())+point.getCoordinate_y().multiply(point.getCoordinate_y());
         return Math.pow(size,0.5);
-    }                                       //size of point- the distance of zero
+    }                                       //size of point - the distance of zero
 }

@@ -1,3 +1,5 @@
+// Bs"d
+
 package primitives;
 
 public abstract class Util {

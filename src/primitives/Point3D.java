@@ -1,6 +1,9 @@
+// Bs"d
+
 package primitives;
 
 public class Point3D extends Point2D {
+
     private Coordinate coordinate_z;
 
 
@@ -86,8 +89,8 @@ public class Point3D extends Point2D {
     }                                                   //calculating the distance between 2 points;
 
     public double size(Point3D point){
-        double size=point.getCoordinate_z().multiply(point.getCoordinate_z())+super.size(point)*super.size(point);
+        double size = point.getCoordinate_z().multiply(point.getCoordinate_z())+super.size(point)*super.size(point);
         return Math.pow(size,0.5);
-    }                                                       //size of point- the distance of zero
+    }                                                       //size of point - the distance of zero
 
 }
