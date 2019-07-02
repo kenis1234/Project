@@ -35,16 +35,14 @@ public class SpotLight extends PointLight {
 
     public Color getIntensity(Point3D point) {
         double d=this.getPosition().distance(point);
-        double t1= this.getKc()+this.getKl()*d+this.getKq()*d*d;
+        double t1= 1/(this.getKc()+this.getKl()*d+this.getKq()*d*d);
         double t2=direction.dotProduct(this.getL(point));
         double t3=abs(t1*t2);
         return mult(color,t3);
     }
 
     @Override
-    public Vector getL(Point3D p) {
-        return new Vector(direction);
-    } //returns the direction of the light???????
+    public Vector getL(Point3D p) { return p.sub(this.position).normalize();}  //returns the direction of the light???????
 
     @Override
     public Vector getD(Point3D p) {

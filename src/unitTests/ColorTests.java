@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class ColorTests {
 
 
-    @Test
+    /*@Test
     public void f1() {
         Triangle t1 = new Triangle(new Point3D(200, 200, -200), new Point3D(200, 0, -200), new Point3D(0, 200, -200));
         Triangle t2 = new Triangle(new Point3D(-200, 200, -200), new Point3D(0, 200, -200), new Point3D(-200, 0, -200));
@@ -50,16 +50,6 @@ public class ColorTests {
         scene.setCameraAndDistance(new Camera(), 100);
         Render r = new Render(im, scene);
         r.renderImage();
-    }
-
-
-
-
-    /*@Test
-    public void f2() {
-        Triangle t1 = new Triangle(new Point3D(200,200,-200), new Point3D(-200,-200,-200), new Point3D(300,-200,-100));
-        Triangle t2 = new Triangle(new Point3D(200,200,-200), new Point3D(-200,-200,-200), new Point3D(-300,200,-350));
-
     }*/
 
     @Test
@@ -80,7 +70,7 @@ public class ColorTests {
                 new Point3D(-225, -225, -270));
 
         triangle.setEmission(new Color(0, 0, 100));
-        triangle.setMaterial(new Material(1, 1, 0, 0, 4));
+        triangle.setMaterial(new Material(0.3, 2, 0, 0, 4));
         scene.addGeometry(triangle);
 
         scene.addLight(new SpotLight(
@@ -88,7 +78,7 @@ public class ColorTests {
                 0.1, 0.00001, 0.000005, new Vector(2, 2, -3)));
 
 
-        ImageWriter imageWriter = new ImageWriter("Spot test 2", 500, 500, 500, 500);
+        ImageWriter imageWriter = new ImageWriter("Spot test with shadow", 500, 500, 500, 500);
 
         Render render = new Render(imageWriter, scene);
         render.renderImage();
@@ -98,7 +88,7 @@ public class ColorTests {
     public void spotLightTest3() {
         Scene scene = new Scene("");
         scene.setBackground(new Color(0, 0, 0));
-        scene.setAmbient(new AmbientLight(new Color(255, 255, 255), 0.1));
+        scene.setAmbient(new AmbientLight(new Color(255, 255, 255), 0.01));
         scene.setCameraAndDistance(new Camera(), 200);
 
         Sphere sphere = new Sphere(500, new Point3D(0.0, 0.0, -1000));
@@ -106,12 +96,21 @@ public class ColorTests {
         sphere.setEmission(new Color(0, 0, 100));
         scene.addGeometry(sphere);
 
+        Triangle triangle = new Triangle(
+                new Point3D(-150, -200, -260),
+                new Point3D(-200, -150, -260),
+                new Point3D(-200, -200, -270));
+
+        triangle.setEmission(new Color(0, 0, 100));
+        triangle.setMaterial(new Material(1, 1, 0, 0, 4));
+        scene.addGeometry(triangle);
+
         scene.addLight(new SpotLight(
                 new Color(255, 100, 100), new Point3D(-200, -200, -150),
                 0.1, 0.00001, 0.000005, new Vector(2, 2, -3)));
 
 
-        ImageWriter imageWriter = new ImageWriter("Spot test 3", 500, 500, 500, 500);
+        ImageWriter imageWriter = new ImageWriter("Spot test with shadow2", 500, 500, 500, 500);
 
         Render render = new Render(imageWriter, scene);
         render.renderImage();

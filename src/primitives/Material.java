@@ -11,6 +11,13 @@ public class Material {
 
 
     /********** Constructors ***********/
+    public Material() {
+        this.kD = 1;
+        this.kS = 1;
+        this.kR = 0;
+        this.kT = 0;
+        this.nShininess = 4;
+    }
     public Material(double kD, double kS, double kR, double kT, int nShininess) {
         this.kD = kD;
         this.kS = kS;
