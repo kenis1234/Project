@@ -2,8 +2,9 @@ package unitTests;
 
 import elements.AmbientLight;
 import elements.Camera;
+import elements.LightSource;
 import elements.SpotLight;
-import geometries.Sphere;
+import geometries.*;
 import geometries.Triangle;
 import org.junit.Test;
 import primitives.Material;
@@ -15,6 +16,7 @@ import scene.Scene;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ColorTests {
 
@@ -50,6 +52,9 @@ public class ColorTests {
         r.renderImage();
     }
 
+
+
+
     /*@Test
     public void f2() {
         Triangle t1 = new Triangle(new Point3D(200,200,-200), new Point3D(-200,-200,-200), new Point3D(300,-200,-100));
@@ -75,11 +80,11 @@ public class ColorTests {
                 new Point3D(-225, -225, -270));
 
         triangle.setEmission(new Color(0, 0, 100));
-        triangle.setMaterial(new Material(1, 1, 1, 1, 4));
+        triangle.setMaterial(new Material(1, 1, 0, 0, 4));
         scene.addGeometry(triangle);
 
         scene.addLight(new SpotLight(
-                new Color(255, 255, 255), new Point3D(-200, -200, -150),
+                new Color(255, 100, 100), new Point3D(-200, -200, -150),
                 0.1, 0.00001, 0.000005, new Vector(2, 2, -3)));
 
 
@@ -89,4 +94,26 @@ public class ColorTests {
         render.renderImage();
     }
 
+    @Test
+    public void spotLightTest3() {
+        Scene scene = new Scene("");
+        scene.setBackground(new Color(0, 0, 0));
+        scene.setAmbient(new AmbientLight(new Color(255, 255, 255), 0.1));
+        scene.setCameraAndDistance(new Camera(), 200);
+
+        Sphere sphere = new Sphere(500, new Point3D(0.0, 0.0, -1000));
+        sphere.setMaterial(new Material(1, 1, 1, 1, 20));
+        sphere.setEmission(new Color(0, 0, 100));
+        scene.addGeometry(sphere);
+
+        scene.addLight(new SpotLight(
+                new Color(255, 100, 100), new Point3D(-200, -200, -150),
+                0.1, 0.00001, 0.000005, new Vector(2, 2, -3)));
+
+
+        ImageWriter imageWriter = new ImageWriter("Spot test 3", 500, 500, 500, 500);
+
+        Render render = new Render(imageWriter, scene);
+        render.renderImage();
+    }
 }

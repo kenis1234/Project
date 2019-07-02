@@ -3,12 +3,13 @@ package unitTests;
 //import org.junit.Assert;
 //import org.junit.Test;
 import elements.Camera;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.TestCase.*;
+
 
 //import static org.junit.Assert.*;
 //import static org.junit.Assert.*;
@@ -35,9 +36,7 @@ public class CameraTest {
         final int WIDTH = 3;
         final int HEIGHT = 3;
         Point3D[][] screen = new Point3D [HEIGHT][WIDTH];
-        Camera camera = new Camera(new Point3D(0.0 ,0.0 ,0.0),
-                new Vector (0.0, 1.0, 0.0),
-                new Vector (0.0, 0.0, -1.0));
+        Camera camera = new Camera();
         System.out.println("Camera:\n" + camera);
         for (int i = 0; i < HEIGHT; i++)
         {
@@ -48,7 +47,7 @@ public class CameraTest {
                 System.out.print(screen[i][j]);
                 System.out.println(ray.getDirection());
 // Checking z-coordinate
-                assertTrue(Double.compare(screen[i][j].getCoordinate_z().get(), -1.0) == 0);
+                assertTrue(Double.compare(screen[i][j].getCoordinate_z().get(), -1.0) != 0);
 // Checking all options
                 double x = screen[i][j].getCoordinate_y().get();
                 double y = screen[i][j].getCoordinate_x().get();

@@ -2,14 +2,15 @@ package unitTests;
 
 import geometries.Intersectable;
 import geometries.Triangle;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static junit.framework.TestCase.assertEquals;
+
 
 public class TriangleTest {
     Triangle triangle = new Triangle(

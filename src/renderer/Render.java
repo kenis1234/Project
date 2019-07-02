@@ -37,7 +37,7 @@ public class Render {
                 }
 
             }
-
+        printGrid(50);
             imageWriter.writeToimage();
     }
 
@@ -57,40 +57,44 @@ public class Render {
 
     private Color calcColor(GeoPoint geopoint) {
         Color color = scene.getAmbient().getIntensity(new Point3D(0, 0, 0));
-        System.out.println(color);
-        System.out.println( geopoint.geometry.getEmission());
+        System.out.println("ambient: "+color);
+        System.out.println( "emission: "+geopoint.geometry.getEmission());
         color = add(color, geopoint.geometry.getEmission());
-        Vector v = geopoint.point.sub(scene.getCamera().getP0()).normalize();
+        Vector v =geopoint.point.sub(scene.getCamera().getP0()).normalize();
         Vector n = geopoint.geometry.getNormal(geopoint.point);
         int nShininess = geopoint.geometry.getMaterial().getnShininess();
         double kd = geopoint.geometry.getMaterial().getkD();
         double ks = geopoint.geometry.getMaterial().getkS();
         for (LightSource lightSource : scene.getLights()) {
             Vector l = lightSource.getL(geopoint.point);
-            if ((n.dotProduct(l) * n.dotProduct(v) > 0)&&(unshaded(l, n, geopoint) )) {
+            if (n.dotProduct(l)*n.dotProduct(v) > 0) {
                 Color lightIntensity = lightSource.getIntensity(geopoint.point);
-                System.out.println(calcDiffusive(kd, l, n, lightIntensity));
-                System.out.println(calcSpecular(ks, l, n, v, nShininess, lightIntensity));
-                color=add(add(color,calcDiffusive(kd, l, n, lightIntensity)),calcSpecular(ks, l, n, v, nShininess, lightIntensity));
+                color=add(color,calcDiffusive(kd, l, n, lightIntensity));
+                color=add(color,calcSpecular(ks, l, n, v, nShininess, lightIntensity));
             }
         }
         return color;
     }
 
     private static final double EPS = 1.0;
-    private boolean unshaded(Vector l, Vector n, GeoPoint geopoint) {
-        Vector lightDirection = l.mult(1); // from point to light source
-        Vector epsVector = n.mult(n.dotProduct(lightDirection) > 0 ? EPS : -EPS);
-        Point3D point = geopoint.point.add(epsVector);
-        Ray lightRay = new Ray(lightDirection,point);
+    private boolean unshaded(LightSource light, Point3D point, Geometry geometry) {
+        Vector lightDirection=new Vector(light.getL(point));
+        lightDirection.mult(-1);
+        lightDirection.normalize();// from point to light source
+        Vector epsVector = new Vector(geometry.getNormal(point));
+        epsVector.mult(2);
+        Point3D geometryPoint = new Point3D(point).add(epsVector);
+        Ray lightRay = new Ray( lightDirection,geometryPoint);
+        //Point3D point = geopoint.point.add(epsVector);
+        //Ray lightRay = new Ray(lightDirection,point);
 
         List<GeoPoint> intersections = scene.getGeometries().findIntersections(lightRay);
 
         return intersections.isEmpty();
+
     }
 
-    public void printGrid(int interval)
-    {
+    public void printGrid(int interval) {
         Color white=new Color(255,255,255);
         int px=imageWriter.getNx();
         int py=imageWriter.getNy();

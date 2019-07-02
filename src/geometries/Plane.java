@@ -7,7 +7,7 @@ import primitives.Vector;
 
 import java.util.*;
 
-public class Plane extends Geometry {
+public class Plane extends Geometry implements FlatGeometry {
     private Point3D point;
     private Vector plumb;
 

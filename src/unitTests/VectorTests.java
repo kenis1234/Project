@@ -1,6 +1,6 @@
 package unitTests;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import primitives.Point3D;
 import primitives.Vector;
 

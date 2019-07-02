@@ -1,6 +1,9 @@
 package elements;
 import primitives.Point3D;
 import java.awt.Color;
+
+import static java.lang.Math.min;
+
 public abstract class Light {
     Color color;
 
@@ -21,9 +24,9 @@ public abstract class Light {
 
     public Color mult(Color color, double ka){
         double d=color.getRGB();
-        int r=(int)(color.getRed()*ka);
-        int g=(int)(color.getGreen()*ka);
-        int b=(int)(color.getBlue()*ka);
+        int r=min((int)(color.getRed()*ka),255);
+        int g=min((int)(color.getGreen()*ka),255);
+        int b=min((int)(color.getBlue()*ka),255);
         return new Color(r,g,b);
     }        //mult a color with a skalar
 }

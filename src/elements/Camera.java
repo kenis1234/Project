@@ -61,19 +61,12 @@ public class Camera {
     public Ray constructRayThroughPixel (double x, double y, double w,double h,int px,int py, double d){
         Point3D p2=new Point3D(p0);
         Vector to=new Vector(getvto());
-        System.out.println(to);
-        System.out.println(d);
         to.mult(d);
         Point3D pc=p2.add(to);         //pc-pc of the lectures
-        System.out.println(p0);
-        System.out.println(to);
-        System.out.println(pc);
         double rx=w/px;
         double ry=h/py;
         double tx=(x-px/2.0)*rx-rx/2.0;
         double ty=(y-py/2.0)*ry-ry/2.0;
-        System.out.println(tx);
-        System.out.println(ty);
         Vector vx= getvRight().mult(tx);             //how much move in x
         Vector vy=new Vector(getvUp().mult(ty*(-1)));//how much move in y
         Point3D p=(pc.add(vx)).add(vy);

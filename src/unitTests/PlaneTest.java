@@ -2,7 +2,7 @@ package unitTests;
 
 import geometries.Intersectable;
 import geometries.Plane;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;

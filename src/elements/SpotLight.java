@@ -6,6 +6,7 @@ import primitives.Vector;
 
 import java.awt.*;
 
+import static java.lang.StrictMath.abs;
 import static java.lang.StrictMath.max;
 
 public class SpotLight extends PointLight {
@@ -14,7 +15,7 @@ public class SpotLight extends PointLight {
     /********** Constructors ***********/
     public SpotLight(Color color, Point3D position, double kc, double kl, double kq, Vector direction) {
         super(color, position, kc, kl, kq);
-        this.direction = direction;
+        this.direction = new Vector(direction.normalize());
     }  //our constructor
 
 
@@ -24,17 +25,25 @@ public class SpotLight extends PointLight {
     }       //gets the direction
 
     /************** Operations ***************/
-    public Color getIntensity(Point3D tmp) {
+    /*public Color getIntensity(Point3D tmp) {
         Vector v=new Vector(direction);
         Vector u=tmp.sub(getPosition());
         v.normalize();
         u.normalize();
         return mult(super.getIntensity(tmp),max(0,v.dotProduct(u)));
+    }*/
+
+    public Color getIntensity(Point3D point) {
+        double d=this.getPosition().distance(point);
+        double t1= this.getKc()+this.getKl()*d+this.getKq()*d*d;
+        double t2=direction.dotProduct(this.getL(point));
+        double t3=abs(t1*t2);
+        return mult(color,t3);
     }
 
     @Override
     public Vector getL(Point3D p) {
-        return p.sub(position);
+        return new Vector(direction);
     } //returns the direction of the light???????
 
     @Override
