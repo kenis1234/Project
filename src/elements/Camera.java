@@ -12,19 +12,19 @@ public class Camera {
     private Vector vUp;
 
     /********** Constructors ***********/
-    public Camera() {
+    /*public Camera() {
         p0=new Point3D(0,0,0);
         vto=new Vector(0,0,-1);
         vUp=new Vector(1,0,0);
         vRight=new Vector(0,1,0);
-    }                //default constructor
+    }                //default constructor*/
 
-    /*public Camera() {
+    public Camera() {
         p0=new Point3D(0,0,0);
         vto=new Vector(0,0,-1);
         vUp=new Vector(0,1,0);
         vRight=vUp.crossProduct(vto).normalize();
-    }                //default constructor*/
+    }                //default constructor
 
     public Camera(Point3D P0, Vector vUp, Vector vTo) {
         p0=new Point3D(P0);
