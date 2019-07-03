@@ -89,6 +89,8 @@ public class Triangle extends Plane implements FlatGeometry{
         list=super.findIntersections(ray);                            //intersections of plane
         if(list.isEmpty())
             return list;
+        //if(ray.getDirection().dotProduct(ray.getHead().sub(list.get(0).point))<0)
+          // return new ArrayList<GeoPoint>() ;
         Point3D p=list.get(0).point;
         double i1=(p.sub(p0)).dotProduct(n1);
         double i2=(p.sub(p0)).dotProduct(n2);

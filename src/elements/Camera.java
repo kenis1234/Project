@@ -77,6 +77,6 @@ public class Camera {
         Point3D p=(pc.add(vx)).add(vy);
         Vector res=p.sub(p0);
         res.normalize();
-        return new Ray(res,p0);
+        return new Ray(res,p);
     }
 }

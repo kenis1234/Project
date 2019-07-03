@@ -18,7 +18,7 @@ import static geometries.Intersectable.GeoPoint;
 import static java.lang.Math.*;
 
 public class Render {
-    private static final int RECURSION_LEVEL = 4;
+    private static final int RECURSION_LEVEL = 3;
     public ImageWriter imageWriter;
     public Scene scene;
 
@@ -31,7 +31,10 @@ public class Render {
         for(int x=0;x<imageWriter.getNx();x++)
             for(int y=0;y<imageWriter.getNy();y++) {
                 Ray ray=scene.getCamera().constructRayThroughPixel(x,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                Point3D tmp=new Point3D(ray.getHead());
+                ray.setHead(scene.getCamera().getP0());
                 List<GeoPoint> intersectionPoints=getSceneRayIntersections(ray);
+                ray.setHead(tmp);
                 if (intersectionPoints.isEmpty())
                     imageWriter.writePixel(x,y,scene.getBackground());
                 else
@@ -96,6 +99,7 @@ public class Render {
                 color=add(color,calcSpecular(ks, l, n, v, nShininess, lightIntensity));
             }
         }
+
         Color reflectedLight = new Color(0,0,0);
         // Recursive call for a reflected ray
         Ray reflectedRay = constructReflectedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
@@ -118,8 +122,10 @@ public class Render {
             GeoPoint refractedEntry = getClosestPoint(intersectionPoints1, geopoint.point);
 
             Color refractedColor = calcColor(refractedEntry, reflectedRay,level+1);
+            if (level==1)
+                System.out.print("R");
 
-            double kt = geopoint.geometry.getMaterial().getkR();
+            double kt = geopoint.geometry.getMaterial().getkT();
             refractedLight = mult(refractedColor,kt);
         }
 
@@ -130,13 +136,13 @@ public class Render {
     }
 
     private Ray constructRefractedRay(Vector normal, Point3D point, Ray inRay) {
-
+        Vector v=inRay.getDirection();
         Vector no=new Vector(normal);
-        no.mult(2);
+        no.mult(-2);
         Point3D p=new Point3D(point);
-        p.add(no);
+        p=p.add(no);
 
-        Ray r=new Ray(inRay.getDirection(),p);
+        Ray r=new Ray(v,p);
         return r;
     }
 
@@ -148,7 +154,7 @@ public class Render {
         Vector v = new Vector(normal);                           //so that wont be intersections with himself
         v.mult(2);
         Point3D p = new Point3D(point);
-        p.add(v);
+        p=p.add(v);
 
         return new Ray(R, p);
     }
