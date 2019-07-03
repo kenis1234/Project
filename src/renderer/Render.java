@@ -28,7 +28,7 @@ public class Render {
     }
 
     public void renderImage(){
-        renderImagewithsupersumpling();
+        renderImageWithSuperSumpling();
     }
     public void renderImageWithoutSuperSumpling(){
         for(int x=0;x<imageWriter.getNx();x++)
@@ -50,7 +50,7 @@ public class Render {
             imageWriter.writeToimage();
     }
 
-    public void renderImagewithsupersumpling(){
+    public void renderImageWithSuperSumpling(){
         for(int x=0;x<imageWriter.getNx();x++)
             for(int y=0;y<imageWriter.getNy();y++) {
                 Ray ray1=scene.getCamera().constructRayThroughPixel(x,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
@@ -140,7 +140,7 @@ public class Render {
             }
         }
 
-        /*Color reflectedLight = new Color(0,0,0);
+        Color reflectedLight = new Color(0,0,0);
         // Recursive call for a reflected ray
         Ray reflectedRay = constructReflectedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
         List<GeoPoint> intersectionPoints=getSceneRayIntersections(reflectedRay);
@@ -171,7 +171,7 @@ public class Render {
 
 
         color=add(color,reflectedLight);
-        color=add(color,refractedLight);*/
+        color=add(color,refractedLight);
         return color;
     }
 
