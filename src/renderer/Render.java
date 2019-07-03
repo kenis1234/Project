@@ -28,6 +28,9 @@ public class Render {
     }
 
     public void renderImage(){
+        renderImagewithsupersumpling();
+    }
+    public void renderImageWithoutSuperSumpling(){
         for(int x=0;x<imageWriter.getNx();x++)
             for(int y=0;y<imageWriter.getNy();y++) {
                 Ray ray=scene.getCamera().constructRayThroughPixel(x,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
@@ -45,6 +48,43 @@ public class Render {
 
             }
             imageWriter.writeToimage();
+    }
+
+    public void renderImagewithsupersumpling(){
+        for(int x=0;x<imageWriter.getNx();x++)
+            for(int y=0;y<imageWriter.getNy();y++) {
+                Ray ray1=scene.getCamera().constructRayThroughPixel(x,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                Ray ray2=scene.getCamera().constructRayThroughPixel(x+0.5,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                Ray ray3=scene.getCamera().constructRayThroughPixel(x-0.5,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                Ray ray4=scene.getCamera().constructRayThroughPixel(x,y+0.5,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                Ray ray5=scene.getCamera().constructRayThroughPixel(x,y-0.5,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                List<Ray> rays=new ArrayList<Ray>();
+                rays.add(ray1);
+                rays.add(ray2);
+                rays.add(ray3);
+                rays.add(ray4);
+                rays.add(ray5);
+                Color color =new Color(0,0,0);
+                for (Ray ray : rays)
+                {
+                    Point3D tmp=new Point3D(ray.getHead());
+                    ray.setHead(scene.getCamera().getP0());
+                    List<GeoPoint> intersectionPoints=getSceneRayIntersections(ray);
+                    ray.setHead(tmp);
+                    if (intersectionPoints.isEmpty())
+                        imageWriter.writePixel(x,y,scene.getBackground());
+                    else
+                    {
+                        GeoPoint closestPoint=getClosestPoint(intersectionPoints,scene.getCamera().getP0());
+                        Color temp=calcColor(closestPoint,ray);
+                        temp=mult(temp,1/5.0);
+                        color=add(color,temp);
+                    }
+                }
+                imageWriter.writePixel(x,y,color);
+
+            }
+        imageWriter.writeToimage();
     }
 
     private List<GeoPoint> getSceneRayIntersections(Ray ray) {
@@ -100,7 +140,7 @@ public class Render {
             }
         }
 
-        Color reflectedLight = new Color(0,0,0);
+        /*Color reflectedLight = new Color(0,0,0);
         // Recursive call for a reflected ray
         Ray reflectedRay = constructReflectedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
         List<GeoPoint> intersectionPoints=getSceneRayIntersections(reflectedRay);
@@ -131,7 +171,7 @@ public class Render {
 
 
         color=add(color,reflectedLight);
-        color=add(color,refractedLight);
+        color=add(color,refractedLight);*/
         return color;
     }
 
