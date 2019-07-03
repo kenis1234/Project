@@ -59,7 +59,7 @@ public class Render {
     private static final double MIN_CALC_COLOR_K = 0.001;
 
     private Color calcColor(GeoPoint geopoint, Ray inRay) {
-        calcColor(geopoint,inRay,0);
+        return calcColor(geopoint,inRay,0);
     }
 
     private Color calcColor(GeoPoint geopoint, Ray inRay, int level) {
