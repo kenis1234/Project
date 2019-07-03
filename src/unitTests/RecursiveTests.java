@@ -21,8 +21,7 @@ import java.awt.*;
 public class RecursiveTests {
 
     @Test
-    public void recursiveTest()
-    {
+    public void recursiveTest(){
         Scene scene = new Scene();
         scene.setCameraAndDistance(new Camera(),300);
 

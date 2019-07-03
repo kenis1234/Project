@@ -16,7 +16,7 @@ public class Material {
         this.kS = 1;
         this.kR = 0;
         this.kT = 0;
-        this.nShininess = 4;
+        this.nShininess = 1;
     }
     public Material(double kD, double kS, double kR, double kT, int nShininess) {
         this.kD = kD;

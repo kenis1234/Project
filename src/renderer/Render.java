@@ -44,7 +44,7 @@ public class Render {
                 }
 
             }
-        //printGrid(50);
+        printGrid(50);
             imageWriter.writeToimage();
     }
 
@@ -61,7 +61,7 @@ public class Render {
         for (GeoPoint gp : intersecrionsPoints)
         {
             Vector v=gp.point.sub(ray.getHead());
-            if(abs(v.getHead().getCoordinate_x().get())<0.01&&abs(v.getHead().getCoordinate_y().get())<0.01&&abs(v.getHead().getCoordinate_z().get())<0.01)
+            if(abs(v.getHead().getCoordinate_x().get())<5&&abs(v.getHead().getCoordinate_y().get())<5&&abs(v.getHead().getCoordinate_z().get())<5)
                 tmp.add(gp);
         }
         for (GeoPoint gp : tmp)
@@ -180,7 +180,7 @@ public class Render {
         for (GeoPoint gp:intersectionPoints)
         {
             Vector v=gp.point.sub(geometryPoint);
-            if(abs(v.getHead().getCoordinate_x().get())<0.01&&abs(v.getHead().getCoordinate_y().get())<0.01&&abs(v.getHead().getCoordinate_z().get())<0.01)
+            if(abs(v.getHead().getCoordinate_x().get())<5&&abs(v.getHead().getCoordinate_y().get())<5&&abs(v.getHead().getCoordinate_z().get())<5)
                 tmp.add(gp);
             else if(gp.geometry instanceof FlatGeometry &&geometry==gp.geometry)
                 tmp.add(gp);

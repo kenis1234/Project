@@ -45,6 +45,7 @@ public class Plane extends Geometry implements FlatGeometry {
         Vector n=new Vector(plumb);                           //the normal of te plane
         Point3D q0=point;
         Vector v=new Vector(ray.getDirection());                //direction of the ray
+        Vector v1=new Vector(ray.getDirection());
         Point3D p0=new Point3D(ray.getHead());
         if(n.dotProduct(v)==0)                        //if ze anach lamishor
             return list;
@@ -53,6 +54,8 @@ public class Plane extends Geometry implements FlatGeometry {
         double t=(n.mult(-1)).dotProduct(l);               //it is the calculation from the lecture
         Point3D p=p0.add(v.mult(t));
         list.add(new GeoPoint(this, p));
+        if((p.sub(ray.getHead()).dotProduct(v1))<0)
+            return new ArrayList<GeoPoint>();
         return list;
     }                      //find intersection point of ray with the plane
 }
