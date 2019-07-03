@@ -44,7 +44,6 @@ public class Render {
                 }
 
             }
-        printGrid(50);
             imageWriter.writeToimage();
     }
 
@@ -61,7 +60,7 @@ public class Render {
         for (GeoPoint gp : intersecrionsPoints)
         {
             Vector v=gp.point.sub(ray.getHead());
-            if(abs(v.getHead().getCoordinate_x().get())<5&&abs(v.getHead().getCoordinate_y().get())<5&&abs(v.getHead().getCoordinate_z().get())<5)
+            if(abs(v.getHead().getCoordinate_x().get())<8&&abs(v.getHead().getCoordinate_y().get())<8&&abs(v.getHead().getCoordinate_z().get())<8)
                 tmp.add(gp);
         }
         for (GeoPoint gp : tmp)
@@ -80,6 +79,7 @@ public class Render {
     private Color calcColor(GeoPoint geopoint, Ray inRay, int level) {
         if(level==RECURSION_LEVEL)
             return new Color(0,0,0);
+
         Color color = scene.getAmbient().getIntensity(new Point3D(0, 0, 0));
         System.out.println("ambient: "+color);
         System.out.println( "emission: "+geopoint.geometry.getEmission());
@@ -121,7 +121,7 @@ public class Render {
         if(!intersectionPoints1.isEmpty()){
             GeoPoint refractedEntry = getClosestPoint(intersectionPoints1, geopoint.point);
 
-            Color refractedColor = calcColor(refractedEntry, reflectedRay,level+1);
+            Color refractedColor = calcColor(refractedEntry, refractedRay,level+1);
             if (level==1)
                 System.out.print("R");
 
@@ -180,7 +180,7 @@ public class Render {
         for (GeoPoint gp:intersectionPoints)
         {
             Vector v=gp.point.sub(geometryPoint);
-            if(abs(v.getHead().getCoordinate_x().get())<5&&abs(v.getHead().getCoordinate_y().get())<5&&abs(v.getHead().getCoordinate_z().get())<5)
+            if(abs(v.getHead().getCoordinate_x().get())<8&&abs(v.getHead().getCoordinate_y().get())<8&&abs(v.getHead().getCoordinate_z().get())<8)
                 tmp.add(gp);
             else if(gp.geometry instanceof FlatGeometry &&geometry==gp.geometry)
                 tmp.add(gp);
