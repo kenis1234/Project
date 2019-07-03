@@ -65,6 +65,7 @@ public class Render {
                 rays.add(ray4);
                 rays.add(ray5);
                 Color color =new Color(0,0,0);
+                Color temp=new Color(0,0,0);
                 for (Ray ray : rays)
                 {
                     Point3D tmp=new Point3D(ray.getHead());
@@ -72,14 +73,15 @@ public class Render {
                     List<GeoPoint> intersectionPoints=getSceneRayIntersections(ray);
                     ray.setHead(tmp);
                     if (intersectionPoints.isEmpty())
-                        imageWriter.writePixel(x,y,scene.getBackground());
+                        temp=scene.getBackground();
                     else
                     {
                         GeoPoint closestPoint=getClosestPoint(intersectionPoints,scene.getCamera().getP0());
-                        Color temp=calcColor(closestPoint,ray);
-                        temp=mult(temp,1/5.0);
-                        color=add(color,temp);
+                        temp=calcColor(closestPoint,ray);
+
                     }
+                    temp=mult(temp,1/5.0);
+                    color=add(color,temp);
                 }
                 imageWriter.writePixel(x,y,color);
 
@@ -162,14 +164,9 @@ public class Render {
             GeoPoint refractedEntry = getClosestPoint(intersectionPoints1, geopoint.point);
 
             Color refractedColor = calcColor(refractedEntry, refractedRay,level+1);
-            if (level==1)
-                System.out.print("R");
-
             double kt = geopoint.geometry.getMaterial().getkT();
             refractedLight = mult(refractedColor,kt);
         }
-
-
         color=add(color,reflectedLight);
         color=add(color,refractedLight);
         return color;
@@ -291,9 +288,9 @@ public class Render {
 
     public Color mult(Color color, double ka){
         double d=color.getRGB();
-        int r=(int)(color.getRed()*ka);
-        int g=(int)(color.getGreen()*ka);
-        int b=(int)(color.getBlue()*ka);
+        int r=min((int)(color.getRed()*ka),255);
+        int g=min((int)(color.getGreen()*ka),255);
+        int b=min((int)(color.getBlue()*ka),255);
         return new Color(r,g,b);
     }
 
