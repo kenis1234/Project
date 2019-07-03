@@ -1,3 +1,5 @@
+// Bs"d
+
 package renderer;
 import elements.LightSource;
 import geometries.FlatGeometry;
@@ -34,7 +36,7 @@ public class Render {
                 else
                 {
                     GeoPoint closestPoint=getClosestPoint(intersectionPoints);
-                    imageWriter.writePixel(x,y,calcColor(closestPoint));
+                    imageWriter.writePixel(x,y,calcColor(closestPoint,ray));
                 }
 
             }
@@ -56,7 +58,7 @@ public class Render {
     }
     private static final double MIN_CALC_COLOR_K = 0.001;
 
-    private Color calcColor(GeoPoint geopoint) {
+    private Color calcColor(GeoPoint geopoint, Ray inRay) {
         Color color = scene.getAmbient().getIntensity(new Point3D(0, 0, 0));
         System.out.println("ambient: "+color);
         System.out.println( "emission: "+geopoint.geometry.getEmission());
@@ -76,7 +78,37 @@ public class Render {
                 color=add(color,calcSpecular(ks, l, n, v, nShininess, lightIntensity));
             }
         }
-        return color;
+        // Recursive call for a reflected ray
+        Ray reflectedRay = constructReflectedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
+        GeoPoint reflectedEntry = findClosesntintersection(refiectedRay);
+
+        Color reflectedColor = calcColor(reflectedEntry.geometry, reflectedEntry.point, reflectedRay);
+        double kr = geopoint.geometry.getMaterial().getkR();
+
+        Color reflectedLight = mult(reflectedColor,kr);
+
+// Recursive call for a refracted ray
+        refractedRay = constructRefractedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
+
+        refractedEntry = findClosesntintersection(refiectedRay):
+        refractedColor = calcColor(reflectedEntry.geometry, reflectedEntry.point, reflectedRay);
+
+        double kt = geopoint.geometry.getMaterial().getkR();
+        refractedLight = new Color (Kt * refractedColor);
+
+            return new Color(ambientLight + emissionLight + diffuseLight + specularLight
+                    + reflectedLight + refractedLight)
+
+            return color;
+    }
+
+    private Ray constructReflectedRay(Vector normal, Point3D point, Ray inRay) {
+        Vector D = new Vector(inRay.getDirection());
+
+        Vector R = D.sub(normal.mult(2*D.dotProduct(normal)));
+        return new Ray(R,  point);
+
+
     }
 
     private static final double EPS = 1.0;
