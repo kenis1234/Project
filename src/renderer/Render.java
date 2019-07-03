@@ -54,6 +54,18 @@ public class Render {
             List<GeoPoint> geometryIntersectionPoints=geometry.findIntersections(ray);
             intersecrionsPoints.addAll(geometryIntersectionPoints);
         }
+        List<GeoPoint> tmp=new ArrayList<GeoPoint>();
+        for (GeoPoint gp : intersecrionsPoints)
+        {
+            Vector v=gp.point.sub(ray.getHead());
+            if(abs(v.getHead().getCoordinate_x().get())<0.01&&abs(v.getHead().getCoordinate_y().get())<0.01&&abs(v.getHead().getCoordinate_z().get())<0.01)
+                tmp.add(gp);
+        }
+        for (GeoPoint gp : tmp)
+        {
+            intersecrionsPoints.remove(gp);
+        }
+
         return intersecrionsPoints;
     }
     private static final double MIN_CALC_COLOR_K = 0.001;
@@ -84,25 +96,33 @@ public class Render {
                 color=add(color,calcSpecular(ks, l, n, v, nShininess, lightIntensity));
             }
         }
+        Color reflectedLight = new Color(0,0,0);
         // Recursive call for a reflected ray
         Ray reflectedRay = constructReflectedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
         List<GeoPoint> intersectionPoints=getSceneRayIntersections(reflectedRay);
-        GeoPoint reflectedEntry = getClosestPoint(intersectionPoints, geopoint.point);
+        if(!intersectionPoints.isEmpty()){
+            GeoPoint reflectedEntry = getClosestPoint(intersectionPoints, geopoint.point);
 
-        Color reflectedColor = calcColor(reflectedEntry,reflectedRay,level+1);
-        double kr = geopoint.geometry.getMaterial().getkR();
+            Color reflectedColor = calcColor(reflectedEntry,reflectedRay,level+1);
+            double kr = geopoint.geometry.getMaterial().getkR();
 
-        Color reflectedLight = mult(reflectedColor,kr);
+           reflectedLight = mult(reflectedColor,kr);
+        }
+
 
 // Recursive call for a refracted ray
         Ray refractedRay = constructRefractedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
         List<GeoPoint> intersectionPoints1=getSceneRayIntersections(refractedRay);
-        GeoPoint refractedEntry = getClosestPoint(intersectionPoints1, geopoint.point);
+        Color refractedLight = new Color(0,0,0);
+        if(!intersectionPoints1.isEmpty()){
+            GeoPoint refractedEntry = getClosestPoint(intersectionPoints1, geopoint.point);
 
-        Color refractedColor = calcColor(reflectedEntry, reflectedRay,level+1);
+            Color refractedColor = calcColor(refractedEntry, reflectedRay,level+1);
 
-        double kt = geopoint.geometry.getMaterial().getkR();
-        Color refractedLight = mult(refractedColor,kt);
+            double kt = geopoint.geometry.getMaterial().getkR();
+            refractedLight = mult(refractedColor,kt);
+        }
+
 
         color=add(color,reflectedLight);
         color=add(color,refractedLight);
