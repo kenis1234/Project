@@ -45,7 +45,7 @@ public class Render {
                     GeoPoint closestPoint=getClosestPoint(intersectionPoints,scene.getCamera().getP0());
                     imageWriter.writePixel(x,y,calcColor(closestPoint,ray));
                 }
-
+            //printGrid(50);
             }
             imageWriter.writeToimage();
     }
