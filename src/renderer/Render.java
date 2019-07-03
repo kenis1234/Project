@@ -18,6 +18,7 @@ import static geometries.Intersectable.GeoPoint;
 import static java.lang.Math.*;
 
 public class Render {
+    private static final int RECURSION_LEVEL = 4;
     public ImageWriter imageWriter;
     public Scene scene;
 
@@ -35,7 +36,7 @@ public class Render {
                     imageWriter.writePixel(x,y,scene.getBackground());
                 else
                 {
-                    GeoPoint closestPoint=getClosestPoint(intersectionPoints);
+                    GeoPoint closestPoint=getClosestPoint(intersectionPoints,scene.getCamera().getP0());
                     imageWriter.writePixel(x,y,calcColor(closestPoint,ray));
                 }
 
@@ -43,7 +44,6 @@ public class Render {
         //printGrid(50);
             imageWriter.writeToimage();
     }
-
 
     private List<GeoPoint> getSceneRayIntersections(Ray ray) {
         Iterator<Geometry> geometries=scene.getGeometriesIterator();
@@ -59,6 +59,12 @@ public class Render {
     private static final double MIN_CALC_COLOR_K = 0.001;
 
     private Color calcColor(GeoPoint geopoint, Ray inRay) {
+        calcColor(geopoint,inRay,0);
+    }
+
+    private Color calcColor(GeoPoint geopoint, Ray inRay, int level) {
+        if(level==RECURSION_LEVEL)
+            return new Color(0,0,0);
         Color color = scene.getAmbient().getIntensity(new Point3D(0, 0, 0));
         System.out.println("ambient: "+color);
         System.out.println( "emission: "+geopoint.geometry.getEmission());
@@ -80,35 +86,51 @@ public class Render {
         }
         // Recursive call for a reflected ray
         Ray reflectedRay = constructReflectedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
-        GeoPoint reflectedEntry = findClosesntintersection(refiectedRay);
+        List<GeoPoint> intersectionPoints=getSceneRayIntersections(reflectedRay);
+        GeoPoint reflectedEntry = getClosestPoint(intersectionPoints, geopoint.point);
 
-        Color reflectedColor = calcColor(reflectedEntry.geometry, reflectedEntry.point, reflectedRay);
+        Color reflectedColor = calcColor(reflectedEntry,reflectedRay,level+1);
         double kr = geopoint.geometry.getMaterial().getkR();
 
         Color reflectedLight = mult(reflectedColor,kr);
 
 // Recursive call for a refracted ray
-        refractedRay = constructRefractedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
+        Ray refractedRay = constructRefractedRay(geopoint.geometry.getNormal(geopoint.point), geopoint.point, inRay);
+        List<GeoPoint> intersectionPoints1=getSceneRayIntersections(refractedRay);
+        GeoPoint refractedEntry = getClosestPoint(intersectionPoints1, geopoint.point);
 
-        refractedEntry = findClosesntintersection(refiectedRay):
-        refractedColor = calcColor(reflectedEntry.geometry, reflectedEntry.point, reflectedRay);
+        Color refractedColor = calcColor(reflectedEntry, reflectedRay,level+1);
 
         double kt = geopoint.geometry.getMaterial().getkR();
-        refractedLight = new Color (Kt * refractedColor);
+        Color refractedLight = mult(refractedColor,kt);
 
-            return new Color(ambientLight + emissionLight + diffuseLight + specularLight
-                    + reflectedLight + refractedLight)
+        color=add(color,reflectedLight);
+        color=add(color,refractedLight);
+        return color;
+    }
 
-            return color;
+    private Ray constructRefractedRay(Vector normal, Point3D point, Ray inRay) {
+
+        Vector no=new Vector(normal);
+        no.mult(2);
+        Point3D p=new Point3D(point);
+        p.add(no);
+
+        Ray r=new Ray(inRay.getDirection(),p);
+        return r;
     }
 
     private Ray constructReflectedRay(Vector normal, Point3D point, Ray inRay) {
         Vector D = new Vector(inRay.getDirection());
+        Vector R = D.sub(normal.mult(2 * D.dotProduct(normal)));
+        R.normalize();                                           //direction
 
-        Vector R = D.sub(normal.mult(2*D.dotProduct(normal)));
-        return new Ray(R,  point);
+        Vector v = new Vector(normal);                           //so that wont be intersections with himself
+        v.mult(2);
+        Point3D p = new Point3D(point);
+        p.add(v);
 
-
+        return new Ray(R, p);
     }
 
     private static final double EPS = 1.0;
@@ -120,24 +142,23 @@ public class Render {
 
         Point3D geometryPoint=new Point3D(point);
         Vector epsVector = new Vector(geometry.getNormal(point).normalize());
-        epsVector.mult(20);
+        epsVector.mult(2);
 
 
-       geometryPoint.add(epsVector);
+        geometryPoint.add(epsVector);
         Ray lightRay = new Ray( lightDirection,geometryPoint);
         List<GeoPoint> intersectionPoints=getSceneRayIntersections(lightRay);
-        if(intersectionPoints.size()==1)
-        {
-            Vector v=intersectionPoints.get(0).point.sub(geometryPoint);
-            if(abs(v.getHead().getCoordinate_x().get())<0.01&&abs(v.getHead().getCoordinate_y().get())<0.01&&abs(v.getHead().getCoordinate_z().get())<0.01)
-                return true;
-        }
+
 
         List<GeoPoint> tmp=new ArrayList<GeoPoint>();
         for (GeoPoint gp:intersectionPoints)
         {
-            //if(gp.geometry instanceof FlatGeometry &&geometry instanceof  FlatGeometry)
-             if(gp.geometry instanceof FlatGeometry &&geometry==gp.geometry)
+            Vector v=gp.point.sub(geometryPoint);
+            if(abs(v.getHead().getCoordinate_x().get())<0.01&&abs(v.getHead().getCoordinate_y().get())<0.01&&abs(v.getHead().getCoordinate_z().get())<0.01)
+                tmp.add(gp);
+            else if(gp.geometry instanceof FlatGeometry &&geometry==gp.geometry)
+                tmp.add(gp);
+            else if(gp.geometry.getMaterial().getkT() != 0)
                 tmp.add(gp);
         }
         for (GeoPoint gp:tmp)
@@ -145,6 +166,8 @@ public class Render {
                 intersectionPoints.remove(gp);
         }
         return intersectionPoints.isEmpty();
+
+
     }
 
     public void printGrid(int interval) {
@@ -186,9 +209,9 @@ public class Render {
         return (mult(lightIntensity, k));
     }
 
-    private GeoPoint getClosestPoint(List<GeoPoint> points){
+    private GeoPoint getClosestPoint(List<GeoPoint> points, Point3D p){
         double distance=Double.MAX_VALUE;
-        Point3D P0=scene.getCamera().getP0();
+        Point3D P0=new Point3D(p);
         GeoPoint minDistancePoint=null;
 
         for(GeoPoint geoPoint: points)
