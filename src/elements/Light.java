@@ -23,7 +23,6 @@ public abstract class Light {
     public abstract Color getIntensity(Point3D tmp);      //abstract function that all lights have to implement
 
     public Color mult(Color color, double ka){
-        double d=color.getRGB();
         int r=min((int)(color.getRed()*ka),255);
         int g=min((int)(color.getGreen()*ka),255);
         int b=min((int)(color.getBlue()*ka),255);

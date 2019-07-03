@@ -19,8 +19,6 @@ public class Scene {
     private Geometries geometries;
     private Camera camera;
     private double distance;
-
-
     private List<LightSource> lights;
 
 
@@ -28,7 +26,10 @@ public class Scene {
 
     public Scene(String name) {
         this.name = name;
+        this.background = new Color(0,0,0);
+        this.ambient = new AmbientLight(new Color(255,255,255),0.1);
         this.geometries = new Geometries();
+        this.camera = new Camera();
         this.lights=new ArrayList<LightSource>();
         distance = 100;
     }                                                 // A constructor that initializes the scene with a name and default values ​​in the rest

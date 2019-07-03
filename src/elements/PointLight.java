@@ -1,3 +1,4 @@
+//Bs"d
 package elements;
 
 import primitives.Point3D;
@@ -52,8 +53,4 @@ public class PointLight extends Light implements LightSource{
         return p.sub(position).normalize();
     } //returns the direction of the light
 
-    @Override
-    public Vector getD(Point3D p) {
-        return null;
-    }     //?
 }

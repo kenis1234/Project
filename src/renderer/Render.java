@@ -286,7 +286,6 @@ public class Render {
                 minDistancePoint=new GeoPoint(geoPoint);
                 distance=P0.distance(geoPoint.point);
             }
-
         return minDistancePoint;
     }
 

@@ -1,3 +1,4 @@
+//Bs"d
 package elements;
 
 import primitives.Point3D;
@@ -31,9 +32,4 @@ public class DirectionalLight extends Light implements LightSource{
     public Vector getL(Point3D p) {
         return new Vector(direction);
     }              //returns the direction of the light
-
-    @Override
-    public Vector getD(Point3D p) {
-        return null;
-    }                          //I don't know
 }

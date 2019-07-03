@@ -1,3 +1,4 @@
+//Bs"d
 package elements;
 
 
@@ -44,9 +45,5 @@ public class SpotLight extends PointLight {
     @Override
     public Vector getL(Point3D p) { return p.sub(this.position).normalize();}  //returns the direction of the light???????
 
-    @Override
-    public Vector getD(Point3D p) {
-        return null;
-    }     //?????
 }
 
