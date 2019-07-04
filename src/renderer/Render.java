@@ -328,6 +328,16 @@ public class Render {
         return (mult(lightIntensity,k));           //according to the lecture
     }
 
+    /**
+     * Calculates the calculated color of the Specular
+     * @param ks The attenuation coefficient KS
+     * @param l The vector from the light source to the desired point
+     * @param n The normal at the desired point
+     * @param v The vector from camera to desired point
+     * @param nShininess  The attenuation coefficient nShininess
+     * @param lightIntensity The intensity of the lightSource in the desired point
+     * @return The calculated color in the desired point
+     */
     private Color calcSpecular(double ks, Vector l, Vector n, Vector v, int nShininess, Color lightIntensity) {
         v.normalize();
         n.normalize();
@@ -340,6 +350,12 @@ public class Render {
         return (mult(lightIntensity, k));
     }
 
+    /**
+     * The function returns from the list of points the closest point to the current point
+     * @param points The list of points
+     * @param p The main point
+     * @return
+     */
     private GeoPoint getClosestPoint(List<GeoPoint> points, Point3D p){
         double distance=Double.MAX_VALUE;
         Point3D P0=new Point3D(p);
@@ -354,6 +370,12 @@ public class Render {
         return minDistancePoint;
     }
 
+    /**
+     * The function multiplies color with an attenuation coefficient
+     * @param color The color
+     * @param ka The reduction factor KA
+     * @return The result of the multiplies between the color with the reduction factor KA
+     */
     public Color mult(Color color, double ka){
         double d=color.getRGB();
         int r=min((int)(color.getRed()*ka),255);                //because it cant be bigger than 255
@@ -362,6 +384,12 @@ public class Render {
         return new Color(r,g,b);
     }
 
+    /**
+     * The function has been summed up two colors
+     * @param a color a
+     * @param b color b
+     * @return The result of the connection between color A and color b
+     */
     private Color add (Color a,Color b){
         int r=min(255,a.getRed()+b.getRed());                //because it cant be bigger than 255
         int g=min(255,a.getGreen()+b.getGreen());
