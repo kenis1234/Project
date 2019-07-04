@@ -61,22 +61,43 @@ public class Point2D {
 
 
     /************** Operations ***************/
+
+    /**
+     * Calculates subtraction between two points
+     * @param point2D The other point
+     * @return The subtraction between the other point from the current point
+     */
     public Point2D sub(Point2D point2D) {
         Coordinate y=( getCoordinate_y().subtract(point2D.getCoordinate_y()));
         Coordinate x=( getCoordinate_x().subtract(point2D.getCoordinate_x()));
         return new Point2D(x,y);
     }                                    //sub point from other and returns a point
 
+    /**
+     * Calculates addition between two points
+     * @param point2D The other point
+     * @return The addition between the other point and the current point
+     */
     public Point2D add(Point2D point2D) {
         Coordinate y=( getCoordinate_y().add(point2D.getCoordinate_y()));
         Coordinate x=( getCoordinate_x().add(point2D.getCoordinate_x()));
         return new Point2D(x,y);
     }                                    //add point to other and returns a point
 
+    /**
+     * Calculates the distance between two points
+     * @param other The other point
+     * @return The distance between the other point and the current point
+     */
     public double distance (Point2D other){
         return size(this.sub(other));
     }                                  //calculating the distance between 2 points
 
+    /**
+     * Calculates size of point
+     * @param point The point
+     * @return The size of the point
+     */
     public double size(Point2D point){
         double size=point.getCoordinate_x().multiply(point.getCoordinate_x())+point.getCoordinate_y().multiply(point.getCoordinate_y());
         return Math.pow(size,0.5);
