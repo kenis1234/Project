@@ -24,6 +24,11 @@ public class Render {
 
 
     /***********constructors*************/
+    /**
+     * constructo render
+     * @param i - image writer
+     * @param s- scene
+     */
     public Render(ImageWriter i, Scene s){
         imageWriter=i;
         scene=s;
@@ -37,7 +42,7 @@ public class Render {
      *defines if render image without super sumpling or with
      */
     public void renderImage(){
-        renderImageWithSuperSumpling();
+        renderImageWithoutSuperSumpling();
     }
 
     /**

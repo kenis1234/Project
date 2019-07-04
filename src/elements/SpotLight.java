@@ -14,6 +14,15 @@ public class SpotLight extends PointLight {
     public Vector direction;
 
     /********** Constructors ***********/
+    /**
+     * constructor for the spot
+     * @param color- thecolor
+     * @param position - location
+     * @param kc- factor kc
+     * @param kl- factor kj
+     * @param kq factor kq
+     * @param direction direction of the vector
+     */
     public SpotLight(Color color, Point3D position, double kc, double kl, double kq, Vector direction) {
         super(color, position, kc, kl, kq);
         this.direction = new Vector(direction.normalize());

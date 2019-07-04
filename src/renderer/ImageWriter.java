@@ -23,6 +23,15 @@ public class ImageWriter {
     private String _imageName;
 
     // ***************** Constructors ********************** //
+
+    /**
+     * constructor image writer
+     * @param imageName - image name
+     * @param width- scene width
+     * @param height- senen height
+     * @param nX- pixels x
+     * @param nY- pixels y
+     */
     public ImageWriter(String imageName, double width, double height, int nX, int nY) {
         _imageName = imageName;
         _imageWidth = width;
