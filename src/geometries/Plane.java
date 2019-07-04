@@ -39,6 +39,11 @@ public class Plane extends Geometry implements FlatGeometry {
         return new Vector(plumb.normalize());
     }  // Return the normal of the Plane
 
+    /**
+     * Finds all the points of intersection of the given ray with the plane
+     * @param ray The ray with which the cutting with the plane is calculated
+     * @return All the points of intersection of the ray with the plane
+     */
     @Override
     public List<GeoPoint> findIntersections(Ray ray){
         List<GeoPoint> list=new ArrayList<GeoPoint>();

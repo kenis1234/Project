@@ -89,7 +89,10 @@ public class Scene {
 
 
     /************** Operations ***************/
-
+    /**
+     *
+     * @param g
+     */
     public void addGeometry(Geometry g){
         geometries.add(g);
     }                                       // Add geometry to secne's geometries

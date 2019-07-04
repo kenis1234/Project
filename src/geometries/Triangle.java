@@ -67,6 +67,11 @@ public class Triangle extends Plane implements FlatGeometry{
         return super.getNormal(point);
     }                            //returns the normal of the triangle in a point
 
+    /**
+     * Finds all the points of intersection of the given ray with the Triangle
+     * @param ray The ray with which the cutting with the Triangle is calculated
+     * @return All the points of intersection of the ray with the Triangle
+     */
     @Override
     public List<GeoPoint> findIntersections(Ray ray){
         Point3D t1=point1;

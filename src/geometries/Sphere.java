@@ -54,6 +54,11 @@ public class Sphere extends RadialGeometry{
         return point.sub(center).normalize();
     }                                         //calculating the normal vector in some point
 
+    /**
+     * Finds all the points of intersection of the given ray with the Sphere
+     * @param ray The ray with which the cutting with the Sphere is calculated
+     * @return All the points of intersection of the ray with the Sphere
+     */
     @Override
     public List<GeoPoint> findIntersections(Ray ray)                                     //find intersections of ray with the sphere
     {

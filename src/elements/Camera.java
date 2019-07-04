@@ -1,4 +1,4 @@
-//bs"d
+//Bs"d
 package elements;
 
 import primitives.Point3D;
@@ -39,6 +39,7 @@ public class Camera {
 
 
     /************** Getters/Setters *******/
+
     public Point3D getP0() {
         return new Point3D(p0);
     }           //get the point of the camera
@@ -57,13 +58,18 @@ public class Camera {
 
 
     /************** Operations ***************/
-    //constructing ray throw some pixel
-    //x,y- the number of the pixel
-    //w- the width of the image
-    //h- the height of the image
-    //px-number of pixels in the x
-    //py- number of pixels in y
-    //d- the distance of the plane from the camera
+
+    /**
+     * constructing ray throw some pixel
+     * @param x the number x of the pixel
+     * @param y the number y of the pixel
+     * @param w the width of the image
+     * @param h the height of the image
+     * @param px number of pixels in the x
+     * @param py number of pixels in y
+     * @param d the distance of the plane from the camera
+     * @return A Ray that passes through the requested pixel
+     */
     public Ray constructRayThroughPixel (double x, double y, double w,double h,int px,int py, double d){
         Point3D p2=new Point3D(p0);
         Vector to=new Vector(getvto());

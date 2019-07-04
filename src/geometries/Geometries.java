@@ -34,6 +34,11 @@ public class Geometries implements Intersectable {
 
 
     /************** Operations ***************/
+    /**
+     * Finds all the points of intersection of the given ray with for each of the geometries from the list of geometries
+     * @param ray The ray with which the cutting with the Geometries is calculated
+     * @return All the points of intersection of the given ray with  for each of the geometries from the list of geometries
+     */
     @Override
     public List<GeoPoint> findIntersections(Ray ray) {
         List<GeoPoint> list = new ArrayList<GeoPoint>();
