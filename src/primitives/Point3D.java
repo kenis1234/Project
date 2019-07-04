@@ -62,7 +62,11 @@ public class Point3D extends Point2D {
 
     /************** Operations ***************/
 
-
+    /**
+     * Calculates subtraction between two points
+     * @param point3D The other point
+     * @return The subtraction between the other point from the current point
+     */
     public Vector sub(Point3D point3D) {
         Coordinate z=( coordinate_z.subtract(point3D.getCoordinate_z()));
         Coordinate y=( getCoordinate_y().subtract(point3D.getCoordinate_y()));
@@ -70,6 +74,11 @@ public class Point3D extends Point2D {
         return new Vector(x,y,z);
     }                                                      //sub 2 points and returns vector
 
+    /**
+     * Calculates addition between two points
+     * @param point3D The other point
+     * @return The addition between the other point and the current point
+     */
     public Point3D add(Point3D point3D) {
         Coordinate z=( coordinate_z.add(point3D.getCoordinate_z()));
         Coordinate y=( getCoordinate_y().add(point3D.getCoordinate_y()));
@@ -77,6 +86,11 @@ public class Point3D extends Point2D {
         return new Point3D(x,y,z);
     }                                                     //add point to point and returns point
 
+    /**
+     * Adding a vector to a point
+     * @param point3D The vector
+     * @return The adding of the vector and the point
+     */
     public Point3D add(Vector point3D) {
         Coordinate z=( coordinate_z.add(point3D.getHead().getCoordinate_z()));
         Coordinate y=( getCoordinate_y().add(point3D.getHead().getCoordinate_y()));
@@ -84,10 +98,20 @@ public class Point3D extends Point2D {
         return new Point3D(x,y,z);
     }                                                      //add vector to point and returns point
 
+    /**
+     * Calculates the distance between two points
+     * @param other The other point
+     * @return The distance between the other point and the current point
+     */
     public double distance (Point3D other){
         return (this.sub(other)).size();
     }                                                   //calculating the distance between 2 points;
 
+    /**
+     * Calculates size of point
+     * @param point The point
+     * @return The size of the point
+     */
     public double size(Point3D point){
         double size = point.getCoordinate_z().multiply(point.getCoordinate_z())+super.size(point)*super.size(point);
         return Math.pow(size,0.5);
