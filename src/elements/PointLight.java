@@ -42,6 +42,11 @@ public class PointLight extends Light implements LightSource{
 
     /************** Operations ***************/
     @Override
+    /**
+     * get intensity of the light in some point
+     * @param point - the point we check the light in
+     * @return - the calculated color
+     */
     public Color getIntensity(Point3D tmp) {
         double d=tmp.distance(position);
         double temp=1/(getKc()+getKl()*d+getKq()*d*d);

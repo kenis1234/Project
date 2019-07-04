@@ -34,6 +34,11 @@ public class SpotLight extends PointLight {
         return mult(super.getIntensity(tmp),max(0,v.dotProduct(u)));
     }*/
 
+    /**
+     * get intensity of the light in some point
+     * @param point - the point we check the light in
+     * @return - the calculated color
+     */
     public Color getIntensity(Point3D point) {
         double d=this.getPosition().distance(point);
         double t1= 1/(this.getKc()+this.getKl()*d+this.getKq()*d*d);

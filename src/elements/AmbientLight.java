@@ -15,6 +15,11 @@ public class AmbientLight extends Light{
 
 
     /************** Operations ***************/
+    /**
+     * get intensity of the light in some point
+     * @param t - the point we check the light in
+     * @return - the calculated color
+     */
     public Color getIntensity(Point3D t){
         return mult(color,ka);
     }    //calculating the color
