@@ -44,23 +44,23 @@ public class Render {
      * build the scene- checking every pixel what color it and building the image
      */
     public void renderImageWithoutSuperSumpling(){
-        for(int x=0;x<imageWriter.getNx();x++)
+        for(int x=0;x<imageWriter.getNx();x++)                      //every pixel
             for(int y=0;y<imageWriter.getNy();y++) {
-                Ray ray=scene.getCamera().constructRayThroughPixel(x,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
-                Point3D tmp=new Point3D(ray.getHead());
-                ray.setHead(scene.getCamera().getP0());
-                List<GeoPoint> intersectionPoints=getSceneRayIntersections(ray);
-                ray.setHead(tmp);
-                if (intersectionPoints.isEmpty())
-                    imageWriter.writePixel(x,y,scene.getBackground());
+                Ray ray=scene.getCamera().constructRayThroughPixel(x,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());  //construct ray with the camera
+                Point3D tmp=new Point3D(ray.getHead());                                                                // temp we store in him some point
+                ray.setHead(scene.getCamera().getP0());                                                                //set in the ray the point of the camera
+                List<GeoPoint> intersectionPoints=getSceneRayIntersections(ray);                                       //find the intersection points
+                ray.setHead(tmp);                                                                                      //returns the point we stored
+                if (intersectionPoints.isEmpty())                                                                      // if it is not intersecting with nothing
+                    imageWriter.writePixel(x,y,scene.getBackground());                                                 //the color os the background
                 else
                 {
-                    GeoPoint closestPoint=getClosestPoint(intersectionPoints,scene.getCamera().getP0());
-                    imageWriter.writePixel(x,y,calcColor(closestPoint,ray));
+                    GeoPoint closestPoint=getClosestPoint(intersectionPoints,scene.getCamera().getP0());               //get the closest intersection point
+                    imageWriter.writePixel(x,y,calcColor(closestPoint,ray));                                           //write in this pixel the calculated color
                 }
             //printGrid(50);
             }
-            imageWriter.writeToimage();
+            imageWriter.writeToimage();                                                                              // this function build the image
     }
 
     /**
