@@ -49,11 +49,19 @@ public class Geometries implements Intersectable {
         return list;
     }                   //find intersections with all of geometries
 
+    /**
+     * adding a geometry to the list
+     * @param g - the geometry we add
+     */
     public void add(Geometry g)
     {
         geometries.add(g);
-    }                       //add one geometry
+    }
 
+    /**
+     * adding list of geometries
+     * @param g - the list we add
+     */
     public void add(List<Geometry> g)
     {
         geometries.addAll(g);
