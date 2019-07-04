@@ -22,34 +22,50 @@ public class Render {
     public ImageWriter imageWriter;
     public Scene scene;
 
+
+    /***********constructors*************/
     public Render(ImageWriter i, Scene s){
         imageWriter=i;
         scene=s;
     }
 
+
+
+
+    /******************operations**************/
+    /**
+     *defines if render image without super sumpling or with
+     */
     public void renderImage(){
         renderImageWithSuperSumpling();
     }
+
+    /**
+     * build the scene- checking every pixel what color it and building the image
+     */
     public void renderImageWithoutSuperSumpling(){
-        for(int x=0;x<imageWriter.getNx();x++)
+        for(int x=0;x<imageWriter.getNx();x++)                      //every pixel
             for(int y=0;y<imageWriter.getNy();y++) {
-                Ray ray=scene.getCamera().constructRayThroughPixel(x,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
-                Point3D tmp=new Point3D(ray.getHead());
-                ray.setHead(scene.getCamera().getP0());
-                List<GeoPoint> intersectionPoints=getSceneRayIntersections(ray);
-                ray.setHead(tmp);
-                if (intersectionPoints.isEmpty())
-                    imageWriter.writePixel(x,y,scene.getBackground());
+                Ray ray=scene.getCamera().constructRayThroughPixel(x,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());  //construct ray with the camera
+                Point3D tmp=new Point3D(ray.getHead());                                                                // temp we store in him some point
+                ray.setHead(scene.getCamera().getP0());                                                                //set in the ray the point of the camera
+                List<GeoPoint> intersectionPoints=getSceneRayIntersections(ray);                                       //find the intersection points
+                ray.setHead(tmp);                                                                                      //returns the point we stored
+                if (intersectionPoints.isEmpty())                                                                      // if it is not intersecting with nothing
+                    imageWriter.writePixel(x,y,scene.getBackground());                                                 //the color os the background
                 else
                 {
-                    GeoPoint closestPoint=getClosestPoint(intersectionPoints,scene.getCamera().getP0());
-                    imageWriter.writePixel(x,y,calcColor(closestPoint,ray));
+                    GeoPoint closestPoint=getClosestPoint(intersectionPoints,scene.getCamera().getP0());               //get the closest intersection point
+                    imageWriter.writePixel(x,y,calcColor(closestPoint,ray));                                           //write in this pixel the calculated color
                 }
             //printGrid(50);
             }
-            imageWriter.writeToimage();
+            imageWriter.writeToimage();                                                                              // this function build the image
     }
 
+    /**
+     * build the scene- checking every pixel 5 times what color it and building the image
+     */
     public void renderImageWithSuperSumpling(){
         for(int x=0;x<imageWriter.getNx();x++)
             for(int y=0;y<imageWriter.getNy();y++) {
@@ -89,6 +105,11 @@ public class Render {
         imageWriter.writeToimage();
     }
 
+    /**
+     *  finds the intersections
+     * @param ray - the ray with him we check if there are intersection points
+     * @return - list of geopoints
+     */
     private List<GeoPoint> getSceneRayIntersections(Ray ray) {
         Iterator<Geometry> geometries=scene.getGeometriesIterator();
         List<GeoPoint> intersecrionsPoints=new ArrayList<GeoPoint>();
@@ -114,10 +135,23 @@ public class Render {
     }
     private static final double MIN_CALC_COLOR_K = 0.001;
 
+    /**
+     * calculating the color in specific point
+     * @param geopoint - the point and geometry that we check the color there
+     * @param inRay - the ray we got to this point
+     * @return - the calculated color
+     */
     private Color calcColor(GeoPoint geopoint, Ray inRay) {
         return calcColor(geopoint,inRay,0);
     }
 
+    /**
+     * calculating the color in specific point
+     * @param geopoint the point and geometry that we check the color there
+     * @param inRay the ray we got to this point
+     * @param level - the recursion level
+     * @return the calculated color
+     */
     private Color calcColor(GeoPoint geopoint, Ray inRay, int level) {
         if(level==RECURSION_LEVEL)
             return new Color(0,0,0);
@@ -172,6 +206,13 @@ public class Render {
         return color;
     }
 
+    /**
+     * constructs reflected ray
+     * @param normal - the normal of the geometry in the point
+     * @param point - the point we construct the ray throw him
+     * @param inRay - the original ray
+     * @return - reflected ray
+     */
     private Ray constructRefractedRay(Vector normal, Point3D point, Ray inRay) {
         Vector v=inRay.getDirection();
         Vector no=new Vector(normal);
@@ -182,6 +223,14 @@ public class Render {
         Ray r=new Ray(v,p);
         return r;
     }
+
+    /**
+     * constructs refracted ray
+     * @param normal- the normal of the geometry in the point
+     * @param point - the point we construct the ray throw him
+     * @param inRay - the original ray
+     * @return - reflected ray
+     */
 
     private Ray constructReflectedRay(Vector normal, Point3D point, Ray inRay) {
         Vector D = new Vector(inRay.getDirection());
@@ -196,7 +245,13 @@ public class Render {
         return new Ray(R, p);
     }
 
-    private static final double EPS = 1.0;
+    /**
+     * checking if the point dont have shade of some light source
+     * @param light - the light source
+     * @param point - the point we check in the shadow
+     * @param geometry - the geometry of the point
+     * @return - bool- if it doeasnt shaded- true
+     */
     private boolean unshaded(LightSource light, Point3D point, Geometry geometry) {
 
         Vector lightDirection=new Vector(light.getL(point));
@@ -233,6 +288,10 @@ public class Render {
 
     }
 
+    /**
+     * printing a white grid
+     * @param interval - how much pixels in each square
+     */
     public void printGrid(int interval) {
         Color white=new Color(255,255,255);
         int px=imageWriter.getNx();
@@ -252,6 +311,15 @@ public class Render {
             }
         }
     }
+
+    /**
+     * calculating the difuusive color
+     * @param kd - some factor
+     * @param l - the direction of the light to the point
+     * @param n - the normal of the geometry in that point
+     * @param lightIntensity - the original light of the light source
+     * @return the claculated color
+     */
 
     private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
         l.normalize();
