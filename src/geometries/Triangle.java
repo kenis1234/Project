@@ -1,3 +1,4 @@
+//Bs"d
 package geometries;
 
 import primitives.Point3D;
@@ -14,6 +15,12 @@ public class Triangle extends Plane implements FlatGeometry{
 
 
     /********** Constructors ***********/
+    /**
+     * constructor of triangle
+     * @param point1- point 1
+     * @param point2 point 2
+     * @param point3 point 3
+     */
     public Triangle(Point3D point1, Point3D point2, Point3D point3) {
         super(point1, point2, point3);
         this.point1 = point1;

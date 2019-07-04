@@ -15,6 +15,11 @@ public class Sphere extends RadialGeometry{
 
 
     /********** Constructors ***********/
+    /**
+     * sphere constructor
+     * @param radius radius double
+     * @param point location centerof sphere
+     */
     public Sphere(double radius, Point3D point) {
         super(radius);
         this.center = point;
