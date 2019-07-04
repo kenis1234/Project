@@ -34,12 +34,15 @@ public class Render {
 
     /******************operations**************/
     /**
-     *
-     *
+     *defines if render image without super sumpling or with
      */
     public void renderImage(){
         renderImageWithSuperSumpling();
     }
+
+    /**
+     * build the scene- checking every pixel what color it and building the image
+     */
     public void renderImageWithoutSuperSumpling(){
         for(int x=0;x<imageWriter.getNx();x++)
             for(int y=0;y<imageWriter.getNy();y++) {
@@ -60,6 +63,9 @@ public class Render {
             imageWriter.writeToimage();
     }
 
+    /**
+     * build the scene- checking every pixel 5 times what color it and building the image
+     */
     public void renderImageWithSuperSumpling(){
         for(int x=0;x<imageWriter.getNx();x++)
             for(int y=0;y<imageWriter.getNy();y++) {
