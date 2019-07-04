@@ -21,7 +21,12 @@ public abstract class Light {
 
     /************** Operations ***************/
     public abstract Color getIntensity(Point3D tmp);      //abstract function that all lights have to implement
-
+    /**
+     * The function multiplies color with an attenuation coefficient
+     * @param color The color
+     * @param ka The reduction factor KA
+     * @return The result of the multiplies between the color with the reduction factor KA
+     */
     public Color mult(Color color, double ka){
         int r=min((int)(color.getRed()*ka),255);
         int g=min((int)(color.getGreen()*ka),255);

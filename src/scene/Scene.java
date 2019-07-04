@@ -90,18 +90,26 @@ public class Scene {
 
     /************** Operations ***************/
     /**
-     *
-     * @param g
+     * Add geometry to the list of geometries of the scene
+     * @param g The geometry for add
      */
     public void addGeometry(Geometry g){
         geometries.add(g);
     }                                       // Add geometry to secne's geometries
 
+    /**
+     *  Add light source to the list of lights of the scene
+     * @param l The light source for add
+     */
     public void addLight(LightSource l){
         lights.add(l);
     }                        //  Add light to secne's lights
 
+    /**
+     * Get the iterator of the secne's geometries
+     * @return The iterator of the secne's geometries
+     */
     public Iterator<Geometry> getGeometriesIterator(){
         return geometries.getGeometries().iterator();
-    }   // Get the iterator of the secne's geometries
+    }
 }
