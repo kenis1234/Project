@@ -62,14 +62,29 @@ public class Vector {
 
 
     /************** Operations ***************/
+    /**
+     * sub vector from our vector
+     * @param other - the vector we sub him
+     * @return new calculated vector
+     */
     public Vector sub (Vector other){
         return new Vector(head.sub(other.getHead()));
     }                                             //sub vector from another and returns a vector;
 
+    /**
+     * add vector from our vector
+     * @param other - the vector we add him
+     * @return new calculated vector
+     */
     public Vector add (Vector other){
         return new Vector(head.add(other.getHead()));
     }                                             //add vector from another and returns a vector;
 
+    /**
+     * mult our vector in scalar
+     * @param scalar - in what we mult
+     * @return the calculated vector
+     */
     public Vector mult (double scalar){
         Coordinate x = head.getCoordinate_x().scale(scalar);
         Coordinate y = head.getCoordinate_y().scale(scalar);
@@ -78,6 +93,11 @@ public class Vector {
         return this;
     }                                           //mult the vector himself and returns himself;
 
+    /**
+     * dividing our vector in scalar
+     * @param scalar - in what we divide
+     * @return the calculated vector
+     */
     public void div (double scalar){
         try{
             if(scalar==0)
@@ -93,10 +113,21 @@ public class Vector {
         }
     }                                              //mult the vector himself
 
+    /**
+     * dot product between two vectors
+     * @param other - the other vector
+     * @return - tha calculated result- a number
+     */
     public double dotProduct (Vector other){
         return head.getCoordinate_x().multiply(other.getHead().getCoordinate_x())+head.getCoordinate_y().multiply(other.getHead().getCoordinate_y())+head.getCoordinate_z().multiply(other.getHead().getCoordinate_z());
     }                                      //dot product between 2 vectors
 
+
+    /**
+     * cross product between two vectors
+     * @param other - the other vector
+     * @return - tha calculated result- a vector
+     */
     public Vector crossProduct (Vector other) {
         try {
             Coordinate x = new Coordinate(head.getCoordinate_y().multiply(other.getHead().getCoordinate_z()) - (head.getCoordinate_z().multiply(other.getHead().getCoordinate_y())));  //y1*z2-z1*y2
@@ -112,10 +143,19 @@ public class Vector {
         }
     }                                   //cross product between 2 vectors
 
+    /**
+     * calculate the size of the vector (size of his head)
+     * @return a double- the size
+     */
     public double size(){
         return getHead().size(getHead());
     }                           //size(length) of the vector
 
+
+    /**
+     * dividing him in his size and returns the result
+     * @return the new  normalized vector
+     */
     public Vector normalize(){
         div(size());
         return new Vector(head);
