@@ -8,16 +8,33 @@ public class Point3D extends Point2D {
 
 
     /********** Constructors ***********/
-    public Point3D(Coordinate coordinate_x, Coordinate coordinate_y, Coordinate coordinate_z) {
+
+    /**
+     * Constructor that receives three coordinates and creates a point from them
+     * @param coordinate_x The x coordinate
+     * @param coordinate_y The y coordinate
+     * @param coordinate_z The z coordinate
+     */
+        public Point3D(Coordinate coordinate_x, Coordinate coordinate_y, Coordinate coordinate_z) {
         super(coordinate_x, coordinate_y);
         this.coordinate_z = new Coordinate(coordinate_z);
     }//counstruct point by 3 coordinates
 
+    /**
+     * Constructor that accepts three double numbers and creates a point from them
+     * @param coordinate_x
+     * @param coordinate_y
+     * @param coordinate_z
+     */
     public Point3D(double coordinate_x, double coordinate_y, double coordinate_z) {
         super(coordinate_x, coordinate_y);
         this.coordinate_z = new Coordinate(coordinate_z);
     }            //counstruct point by 3 doubles (coordinates)
 
+    /**
+     * copy constructor
+     * @param point3D The other point3D
+     */
     public Point3D(Point3D point3D) {
         super(point3D.getCoordinate_x(), point3D.getCoordinate_y());
         this.coordinate_z = new Coordinate(point3D.getCoordinate_z());
@@ -25,16 +42,29 @@ public class Point3D extends Point2D {
 
 
     /************** Getters/Setters *******/
+    /**
+     * Get z coordinate
+     * @return The coordinate z
+     */
     public Coordinate getCoordinate_z() {
         return coordinate_z;
     }                                                      //return coordinate of z
 
+    /**
+     * Set z coordinate
+     * @param coordinate_z The coordinate z
+     */
     public void setCoordinate_z(Coordinate coordinate_z) {
         this.coordinate_z = new Coordinate(coordinate_z);
     }                                     //set coordinate z
 
 
     /*************** Admin *****************/
+    /**
+     * Checks whether the object received is equal to the current point
+     * @param point The other object
+     * @return if they equals - True; else - False
+     */
     @Override
     public boolean equals(Object point) {                                                          //if 2 points are equal
         if(point==null)
@@ -50,6 +80,10 @@ public class Point3D extends Point2D {
         return false;
     }                                                      //if 2 points are equal
 
+    /**
+     * Displays the current point as a string
+     * @return the display of the current point as string
+     */
     @Override
     public String toString() {
         return "Point3D{" +

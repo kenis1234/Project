@@ -8,11 +8,21 @@ public class Point2D {
 
 
     /********** Constructors ***********/
+    /**
+     * Constructor that receives two coordinates and creates a point from them
+     * @param coordinate_x The x coordinate
+     * @param coordinate_y The y coordinate
+     */
     public Point2D(Coordinate coordinate_x, Coordinate coordinate_y) {
         this.coordinate_x=new Coordinate(coordinate_x);
         this.coordinate_y=new Coordinate(coordinate_y);
     }  //counstruct point by 2 coordinates
 
+    /**
+     * Constructor that accepts two double numbers and creates a point from them
+     * @param coordinate_x Value of x
+     * @param coordinate_y Value of y
+     */
     public Point2D(double coordinate_x, double coordinate_y) {
         this.coordinate_x = new Coordinate(coordinate_x);
         this.coordinate_y = new Coordinate(coordinate_y);
@@ -20,24 +30,47 @@ public class Point2D {
 
 
     /************** Getters/Setters *******/
+    /**
+     * Get the x coordinate
+     * @return the x coordinate
+     */
     public Coordinate getCoordinate_x() {
         return coordinate_x;
     }              //return coordinate of x
 
+    /**
+     * Set the x coordinate
+     * @return the new x coordinate
+     * @param coordinate_x The new coordinate x
+     */
     public void setCoordinate_x(Coordinate coordinate_x) {
         this.coordinate_x = coordinate_x;
     }//set coordinate x
 
+    /**
+     * Get the y coordinate
+     * @return the y coordinate
+     */
     public Coordinate getCoordinate_y() {
         return coordinate_y;
     }              //return coordinate of y
 
+    /**
+     * Set the y coordinate
+     * @return the new y coordinate
+     * @param coordinate_y The new coordinate y
+     */
     public void setCoordinate_y(Coordinate coordinate_y) {
         this.coordinate_y = coordinate_y;
     }//set coordinate y
 
 
     /*************** Admin *****************/
+    /**
+     * Checks whether the object received is equal to the current point
+     * @param point The other object
+     * @return if they equals - True; else - False
+     */
     @Override
     public boolean equals(Object point) {
         if(point==null)
@@ -51,6 +84,10 @@ public class Point2D {
         return false;
     }                                   //checks if 2 points are equal
 
+    /**
+     * Displays the current point as a string
+     * @return the display of the current point as string
+     */
     @Override
     public String toString() {
         return "Point3D{" +

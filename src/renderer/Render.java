@@ -74,7 +74,11 @@ public class Render {
     public void renderImageWithSuperSumpling(){
         for(int x=0;x<imageWriter.getNx();x++)                      //every pixel
             for(int y=0;y<imageWriter.getNy();y++) {
-                Ray ray1=scene.getCamera().constructRayThroughPixel(x,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());   //construct rays with the camera
+                Ray ray1=scene.getCamera().constructRayThroughPixel(
+                        x,y,
+                        imageWriter.getWidth(),imageWriter.getHeight(),
+                        imageWriter.getNx(),imageWriter.getNy(),
+                        scene.getDistance());   //construct rays with the camera
                 Ray ray2=scene.getCamera().constructRayThroughPixel(x+0.5,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
                 Ray ray3=scene.getCamera().constructRayThroughPixel(x-0.5,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
                 Ray ray4=scene.getCamera().constructRayThroughPixel(x,y+0.5,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());

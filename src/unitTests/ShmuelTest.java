@@ -24,7 +24,7 @@ public class ShmuelTest {
         scene.setAmbient(new AmbientLight(new Color(255, 0, 235),0.1));
         scene.setCameraAndDistance(new Camera(), 200);
 
-        Sphere sphere1 = new Sphere(100, new Point3D(0,0,-100));
+        Sphere sphere1 = new Sphere(100, new Point3D(0,0,-500));
         sphere1.setEmission(new Color(255, 0, 235));
         sphere1.setMaterial(new Material(1,1,1,0.5,20));
 
