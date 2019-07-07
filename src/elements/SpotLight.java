@@ -1,6 +1,6 @@
 //Bs"d
-package elements;
 
+package elements;
 
 import primitives.Point3D;
 import primitives.Vector;
@@ -30,6 +30,11 @@ public class SpotLight extends PointLight {
 
 
     /************** Getters/Setters *******/
+
+    /**
+     * Get the vector direction of the SpotLight
+     * @return The vector direction of the SpotLight
+     */
     public Vector getDirection() {
         return direction;
     }       //gets the direction
@@ -56,6 +61,11 @@ public class SpotLight extends PointLight {
         return mult(color,t3);
     }
 
+    /**
+     * Get the direction of the light
+     * @param p The point
+     * @return The direction of the light
+     */
     @Override
     public Vector getL(Point3D p) { return p.sub(this.position).normalize();}  //returns the direction of the light???????
 

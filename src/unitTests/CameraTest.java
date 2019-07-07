@@ -1,3 +1,4 @@
+// Bs"d
 package unitTests;
 
 //import org.junit.Assert;
@@ -32,7 +33,7 @@ public class CameraTest {
         assertEquals("the direction vector is: Vector{head=Point3D{x=0.20463518708865724, y=-0.21486694644309012, z=-0.9549642064137338}}the head is: Point3D{x=0.0, y=0.0, z=0.0}",ray.toString());
     }
     @Test
-    public void testRaysConstruction(){
+    public void TestRaysConstruction(){
         final int WIDTH = 3;
         final int HEIGHT = 3;
         Point3D[][] screen = new Point3D [HEIGHT][WIDTH];

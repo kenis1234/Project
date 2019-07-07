@@ -2,6 +2,8 @@
 
 package renderer;
 import elements.LightSource;
+import elements.PointLight;
+import elements.SpotLight;
 import geometries.FlatGeometry;
 import geometries.Geometry;
 import primitives.Point3D;
@@ -79,10 +81,10 @@ public class Render {
                         imageWriter.getWidth(),imageWriter.getHeight(),
                         imageWriter.getNx(),imageWriter.getNy(),
                         scene.getDistance());   //construct rays with the camera
-                Ray ray2=scene.getCamera().constructRayThroughPixel(x+0.5,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
-                Ray ray3=scene.getCamera().constructRayThroughPixel(x-0.5,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
-                Ray ray4=scene.getCamera().constructRayThroughPixel(x,y+0.5,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
-                Ray ray5=scene.getCamera().constructRayThroughPixel(x,y-0.5,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                Ray ray2=scene.getCamera().constructRayThroughPixel(x+0.4,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                Ray ray3=scene.getCamera().constructRayThroughPixel(x-0.4,y,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                Ray ray4=scene.getCamera().constructRayThroughPixel(x,y+0.4,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
+                Ray ray5=scene.getCamera().constructRayThroughPixel(x,y-0.4,imageWriter.getWidth(),imageWriter.getHeight(),imageWriter.getNx(),imageWriter.getNy(),scene.getDistance());
                 List<Ray> rays=new ArrayList<Ray>();
                 rays.add(ray1);
                 rays.add(ray2);
@@ -270,7 +272,7 @@ public class Render {
         Point3D geometryPoint=new Point3D(point);
         Vector epsVector = new Vector(geometry.getNormal(point).normalize());
         epsVector.mult(2);
-        geometryPoint.add(epsVector);                               //so there will not be floating point
+        geometryPoint = geometryPoint.add(epsVector);                               //so there will not be floating point
 
 
         Ray lightRay = new Ray( lightDirection,geometryPoint);
@@ -287,6 +289,18 @@ public class Render {
                 tmp.add(gp);
             else if(gp.geometry.getMaterial().getkT() != 0)                                                              //if it a little shakuf
                 tmp.add(gp);
+            else if(light instanceof PointLight)
+            {
+                PointLight pl = (PointLight)light;
+                if(point.distance(pl.getPosition()) < point.distance(gp.point))
+                    tmp.add(gp);
+            }
+            else if(light instanceof SpotLight)
+            {
+                SpotLight sl = (SpotLight)light;
+                if(point.distance(sl.getPosition()) < point.distance(gp.point))
+                    tmp.add(gp);
+            }
         }
         for (GeoPoint gp:tmp)
         {
@@ -329,7 +343,6 @@ public class Render {
      * @param lightIntensity - the original light of the light source
      * @return the claculated color
      */
-
     private Color calcDiffusive(double kd, Vector l, Vector n, Color lightIntensity) {
         l.normalize();
         n.normalize();

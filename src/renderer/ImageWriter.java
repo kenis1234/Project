@@ -42,6 +42,10 @@ public class ImageWriter {
         _image = new BufferedImage(_nX, _nY, BufferedImage.TYPE_INT_RGB);
     }
 
+    /**
+     * Copy Constructor
+     * @param imageWriter The other imageWriter
+     */
     public ImageWriter (ImageWriter imageWriter) {
         this(	imageWriter._imageName,
                 imageWriter._imageWidth, imageWriter._imageHeight,
@@ -50,17 +54,47 @@ public class ImageWriter {
 
     // ***************** Getters/Setters ********************** //
 
+    /**
+     * Get the width of the imageWriter
+     * @return The width of the imageWriter
+     */
     public double getWidth()  { return _imageWidth;  }
+
+    /**
+     * Get the height of the imageWriter
+     * @return The height of the imageWriter
+     */
     public double getHeight() { return _imageHeight; }
 
+    /**
+     * Get the nY
+     * @return The nY
+     */
     public int getNy() { return _nY; }
+
+    /**
+     * Get the nX
+     * @return The nX
+     */
     public int getNx() { return _nX; }
 
+    /**
+     * Set the nY
+     * @param _Ny the new nY
+     */
     public void setNy(int _Ny) { this._nY = _Ny; }
+
+    /**
+     * Set the nX
+     * @param _Nx The new nX
+     */
     public void setNx(int _Nx) { this._nX = _Nx; }
 
     // ***************** Operations ******************** //
 
+    /**
+     * Builds the file itself
+     */
     public void writeToimage(){
         File ouFile = new File(PROJECT_PATH + "/" + _imageName + ".jpg");
         try {
@@ -76,6 +110,12 @@ public class ImageWriter {
         }
     }
 
+    /**
+     * Writes to pixel his color
+     * @param xIndex The value x of the pixel
+     * @param yIndex The value y of the pixel
+     * @param color The color
+     */
     public void writePixel(int xIndex, int yIndex, Color color){
         _image.setRGB(xIndex, yIndex, color.getRGB());
     }

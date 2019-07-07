@@ -60,6 +60,7 @@ public class Point3D extends Point2D {
 
 
     /*************** Admin *****************/
+
     /**
      * Checks whether the object received is equal to the current point
      * @param point The other object

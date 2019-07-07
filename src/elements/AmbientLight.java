@@ -8,6 +8,12 @@ public class AmbientLight extends Light{
     private double ka;
 
     /********** Constructors ***********/
+
+    /**
+     *A constructor that receives color and an attenuation coefficient k and from which creates the AmbientLight
+     * @param c The color of the AmbientLight
+     * @param k The attenuation coefficient k
+     */
     public AmbientLight(Color c, double k){
         super(c);
         ka=k;

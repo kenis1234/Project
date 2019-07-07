@@ -1,4 +1,5 @@
 //Bs"d
+
 package elements;
 
 import primitives.Point3D;
@@ -10,6 +11,11 @@ public class DirectionalLight extends Light implements LightSource{
     private Vector direction;
 
     /********** Constructors ***********/
+    /**
+     * Constructor that gets a direction vector color and creates the DirectionalLight
+     * @param color
+     * @param direction
+     */
     public DirectionalLight(Color color, Vector direction) {
         super(color);
         this.direction = direction;
@@ -17,6 +23,11 @@ public class DirectionalLight extends Light implements LightSource{
 
 
     /************** Getters/Setters *******/
+
+    /**
+     * Get the vector direction of the DirectionalLight
+     * @return The vector direction of the DirectionalLight
+     */
     public Vector getDirection() {
         return new Vector(direction);
     }    //get the direction of the light
@@ -33,6 +44,11 @@ public class DirectionalLight extends Light implements LightSource{
         return new Color(color.getRGB());
     }  //get the calculation of the color
 
+    /**
+     * Get the vector direction of the DirectionalLight
+     * @param p
+     * @return The vector direction of the DirectionalLight
+     */
     @Override
     public Vector getL(Point3D p) {
         return new Vector(direction);

@@ -1,3 +1,5 @@
+// Bs"d
+
 package geometries;
 
 import primitives.Point3D;
@@ -12,15 +14,27 @@ public class Geometries implements Intersectable {
 
 
     /********** Constructors ***********/
+
+    /**
+     * Constructor that gets a list of geometries
+     * @param list The list of the geometries
+     */
     public Geometries(List<Geometry> list) {
         geometries=new ArrayList<Geometry>(list);
     }                             //constructor with list of geometries
 
+    /**
+     * Default constructor
+     */
     public Geometries()
     {
         geometries=new ArrayList<Geometry>();
     }            //default constructor
 
+    /**
+     * A constructor that receives one geometry
+     * @param g The geometry
+     */
     public Geometries(Geometry g) {
         geometries=new ArrayList<Geometry>();
         geometries.add(g);
@@ -28,12 +42,18 @@ public class Geometries implements Intersectable {
 
 
     /************** Getters/Setters *******/
+
+    /**
+     * Get the list of geometries
+     * @return The list of geometries
+     */
     public List<Geometry> getGeometries() {
         return geometries;
     }             //get the list of geometries
 
 
     /************** Operations ***************/
+
     /**
      * Finds all the points of intersection of the given ray with for each of the geometries from the list of geometries
      * @param ray The ray with which the cutting with the Geometries is calculated

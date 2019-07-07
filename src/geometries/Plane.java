@@ -12,10 +12,23 @@ public class Plane extends Geometry implements FlatGeometry {
     private Vector plumb;
 
     /********** Constructors ***********/
+
+    /**
+     * Constructor that gets a plumb vector and creates a plane
+     * @param point
+     * @param plumb
+     */
     public Plane(Point3D point, Vector plumb) {
         this.point = point;
         this.plumb = plumb;
     }                      // Constructor that initializing the plane by point and the plumb vector
+
+    /**
+     * Constructor that initializes the plane by three points
+     * @param point1 The point number 1
+     * @param point2 The point number 2
+     * @param point3 The point number 3
+     */
     public Plane(Point3D point1, Point3D point2, Point3D point3)         // Constructor that initializes the plane by three points
     {
         point=point1;
@@ -24,16 +37,31 @@ public class Plane extends Geometry implements FlatGeometry {
 
 
     /************** Getters/Setters *******/
+
+    /**
+     * Get the point on the plane
+     * @return The point on the plane
+     */
     public Point3D getPoint() {
         return point;
     }                          // Return the point of the Plane
 
+    /**
+     * Get the plumb vector
+     * @return The plumb vector
+     */
     public Vector getPlumb() {
         return plumb;
     }                           // Return the vector plumb of the Plane
 
 
     /************** Operations ***************/
+
+    /**
+     *  Return the normal of the Plane
+     * @param point The point of the plane
+     * @return The normal of the Plane
+     */
     @Override
     public Vector getNormal(Point3D point) {
         return new Vector(plumb.normalize());

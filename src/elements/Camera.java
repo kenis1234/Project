@@ -13,6 +13,10 @@ public class Camera {
     private Vector vUp;
 
     /********** Constructors ***********/
+
+    /**
+     * Default constructor
+     */
     public Camera() {
         p0=new Point3D(0,0,0);
         vto=new Vector(0,0,-1);
@@ -27,11 +31,17 @@ public class Camera {
         vRight=vUp.crossProduct(vto).normalize();
     }                //default constructor*/
 
+    /**
+     * A constructor that gets a point and two vectors and creates a camera
+     * @param P0 The point of the camera
+     * @param vUp The vector Up of the camera
+     * @param vTo The vector Toward of the camera
+     */
     public Camera(Point3D P0, Vector vUp, Vector vTo) {
-        p0=new Point3D(P0);
-        vto=new Vector(vTo);
-        vUp=new Vector(vUp);
-        vRight=new Vector(vTo.crossProduct(vUp));
+        this.p0=new Point3D(P0);
+        this.vto=new Vector(vTo);
+        this.vUp=new Vector(vUp);
+        this.vRight=new Vector(vTo.crossProduct(vUp));
         vto.normalize();
         vUp.normalize();
         vRight.normalize();
@@ -40,18 +50,34 @@ public class Camera {
 
     /************** Getters/Setters *******/
 
+    /**
+     * Get the point of the camera
+     * @return The point of the camera
+     */
     public Point3D getP0() {
         return new Point3D(p0);
     }           //get the point of the camera
 
+    /**
+     * Get the vector Toward of the camera
+     * @return The vector Toward of the camera
+     */
     public Vector getvto() {
         return new Vector(vto);
     }           //get the toward vector
 
+    /**
+     * Get the vector Right of the camera
+     * @return The vector Right of the camera
+     */
     public Vector getvRight() {
         return new Vector(vRight);
     }           //get the right vector
 
+    /**
+     * Get the vector Up of the camera
+     * @return The vector Up of the camera
+     */
     public Vector getvUp() {
         return new Vector(vUp);
     }           //get the up vector
@@ -84,6 +110,6 @@ public class Camera {
         Point3D p=(pc.add(vx)).add(vy);
         Vector res=p.sub(p0);
         res.normalize();
-        return new Ray(res,p);
+        return new Ray(res,new Point3D(p0));
     }
 }

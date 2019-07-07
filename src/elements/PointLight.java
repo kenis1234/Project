@@ -1,4 +1,5 @@
 //Bs"d
+
 package elements;
 
 import primitives.Point3D;
@@ -31,18 +32,35 @@ public class PointLight extends Light implements LightSource{
 
 
     /************** Getters/Setters *******/
+
+    /**
+     * Get the point position
+     * @return The point position
+     */
     public Point3D getPosition() {
         return position;
     }   //get the location
 
+    /**
+     * Get the factor kc
+     * @return The factor kc
+     */
     public double getKc() {
         return kc;
     }                //get kc
 
+    /**
+     * Get the pactor kl
+     * @return The factor kl
+     */
     public double getKl() {
         return kl;
     }                //get kl
 
+    /**
+     * Get the factor kq
+     * @return The factor kq
+     */
     public double getKq() {
         return kq;
     }                //get kq
@@ -61,6 +79,11 @@ public class PointLight extends Light implements LightSource{
         return mult(color,temp);
     }        //get the calculation of the color
 
+    /**
+     * Get the direction of the ligh
+     * @param p
+     * @return The direction of the ligh
+     */
     @Override
     public Vector getL(Point3D p) {
         return p.sub(position).normalize();

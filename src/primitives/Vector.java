@@ -6,40 +6,77 @@ public class Vector {
     private Point3D head;
 
     /********** Constructors ***********/
-
+    /**
+     * Constructor that receives point head and creates a vector from her
+     * @param head
+     */
     public Vector(Point3D head) {
         this.head = new Point3D(head);
     }                                                     //constructor of vecror = gets a point
 
+    /**
+     * A constructor that gets three double numbers x, y and z and creates a vector with them
+     * @param x
+     * @param y
+     * @param z
+     */
     public Vector(double x, double y, double z) {
         head=new Point3D(x,y,z);
     }                                     //gets 3 parameters of double of his vector
 
+    /**
+     * A constructor that gets three double numbers x, y and z and creates a vector with them
+     * @param x
+     * @param y
+     * @param z
+     */
     public Vector(Coordinate x, Coordinate y, Coordinate z) {
         head = new Point3D(x,y,z);
     }                         //gets 3 coordinates of the head of the vector
 
+    /**
+     * Default Constructor
+     */
     public Vector()
     {
         head=new Point3D(1,0,0);
     }        //default constructor
 
+    /**
+     * Copy Constructor
+     * @param vector
+     */
     public Vector(Vector vector) {
         this.head = new Point3D(vector.getHead());
     }           //copy constructor
 
 
     /************** Getters/Setters *******/
+
+    /**
+     * Get the point head of the vector
+     * @return The point head of the vector
+     */
     public Point3D getHead() {
         return head;
     }                                             //get vector's head
 
+    /**
+     * Set the point head of the vector
+     * @param head The new point head of the vector
+     */
     public void setHead(Point3D head) {
         this.head = head;
     }                               //set vector's head
 
 
     /*************** Admin *****************/
+
+    /**
+     * Checks whether the object received v is equal to the current vector
+     * @param v The other object
+     * @return if they equals - True; else - False
+     */
     @Override
     public boolean equals(Object v) {
         if(v==null)
@@ -53,6 +90,10 @@ public class Vector {
         return false;
     }                                           //check if 2 vectors are equal
 
+    /**
+     * Displays the current vector as a string
+     * @return the display of the current vector as string
+     */
     @Override
     public String toString() {
         return "Vector{" +

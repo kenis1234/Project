@@ -8,12 +8,22 @@ public abstract class Light {
     Color color;
 
     /********** Constructors ***********/
+
+    /**
+     * Constructor that receives color and creates the  Light
+     * @param color The color of the Light
+     */
     public Light(Color color) {
         this.color = new Color(color.getRGB());
     }  //copy constructor
 
 
     /************** Getters/Setters *******/
+
+    /**
+     * Get the color of the Light
+     * @return
+     */
     public Color getColor() {
         return color;
     }             //get the color

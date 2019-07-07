@@ -1,4 +1,5 @@
 //Bs"d
+
 package geometries;
 
 import primitives.Point3D;
@@ -30,20 +31,39 @@ public class Triangle extends Plane implements FlatGeometry{
 
 
     /************** Getters/Setters *******/
+
+    /**
+     * Get point 1
+     * @return point 1
+     */
     public Point3D getPoint1() {
         return point1;
     }                                       //get point1
 
+    /**
+     * Get point 2
+     * @return point 2
+     */
     public Point3D getPoint2() {
         return point2;
     }                                       //get point2
 
+    /**
+     * Get point 3
+     * @return point 3
+     */
     public Point3D getPoint3() {
         return point3;
     }                                       //get point3
 
 
     /*************** Admin *****************/
+
+    /**
+     * Checks whether the object received is equal to the current Triangle
+     * @param t The other object
+     * @return if they equals - True; else - False
+     */
     @Override
     public boolean equals(Object t) {
         if(t==null)
@@ -55,6 +75,10 @@ public class Triangle extends Plane implements FlatGeometry{
         return false;
     }                                         //checks if 2 triangles are equal
 
+    /**
+     * Displays the current Triangle as a string
+     * @return the display of the current Triangle as string
+     */
     @Override
     public String toString() {
         return "triangle: " +
@@ -69,6 +93,11 @@ public class Triangle extends Plane implements FlatGeometry{
         return false;
     }
 
+    /**
+     * Calculating the normal vector in some point on the Triangle
+     * @param point The point
+     * @return The normal vector in the point
+     */
     @Override
     public Vector getNormal(Point3D point) {
         return super.getNormal(point);

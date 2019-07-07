@@ -1,4 +1,5 @@
 //bs"d
+
 package geometries;
 
 import primitives.Point3D;
@@ -27,12 +28,23 @@ public class Sphere extends RadialGeometry{
 
 
     /************** Getters/Setters *******/
+
+    /**
+     * Get the center point of the Sphere
+     * @return The center point of the Sphere
+     */
     public Point3D getPoint() {
         return new Point3D( center);
     }                                                      //get the center point
 
 
     /*************** Admin *****************/
+
+    /**
+     * Checks whether the object received is equal to the current sphere
+     * @param sphere The other object
+     * @return if they equals - True; else - False
+     */
     @Override
     public boolean equals(Object sphere) {
         if(sphere==null)
@@ -44,6 +56,10 @@ public class Sphere extends RadialGeometry{
         return false;
     }                                   //checks if 2 spheres are equal
 
+    /**
+     * Displays the current sphere as a string
+     * @return the display of the current sphere as string
+     */
     @Override
     public String toString() {
         return "sphere: " +
@@ -54,6 +70,12 @@ public class Sphere extends RadialGeometry{
 
 
     /************** Operations ***************/
+
+    /**
+     * Calculating the normal vector in some point on the sphere
+     * @param point The point
+     * @return The normal vector in the point
+     */
     @Override
     public Vector getNormal(Point3D point) {
         return point.sub(center).normalize();
