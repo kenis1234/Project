@@ -2,10 +2,12 @@
 
 package geometries;
 
+import primitives.Material;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +29,8 @@ public class Triangle extends Plane implements FlatGeometry{
         this.point1 = point1;
         this.point2 = point2;
         this.point3 = point3;
+        emission=new Color(0,0,0);
+        material=new Material();
     }              //constructor by 3 points
 
 

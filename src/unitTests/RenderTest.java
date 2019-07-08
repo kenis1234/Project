@@ -53,7 +53,7 @@ public class RenderTest {
         scene.setAmbient(new AmbientLight(new Color(26, 65, 10),1));
         scene.setCameraAndDistance(new Camera(),100);
         Render r=new Render(im,scene);
-        r.renderImage();
+        r.renderImage(true);
     }
 
     @Test
@@ -83,7 +83,7 @@ public class RenderTest {
         ImageWriter imageWriter = new ImageWriter("Spot test with shadow5", 500, 500, 500, 500);
 
         Render render = new Render(imageWriter, scene);
-        render.renderImage();
+        render.renderImage(true);
     }
 
 

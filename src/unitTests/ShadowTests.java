@@ -28,7 +28,7 @@ public class ShadowTests {
         scene.setCameraAndDistance(new Camera(), 200);
 
         Sphere sphere = new Sphere(500, new Point3D(0.0, 0.0, -1000));
-        sphere.setMaterial(new Material(1, 1, 1, 1, 20));
+        sphere.setMaterial(new Material(1, 1, 0, 0, 20));
         sphere.setEmission(new Color(0, 0, 100));
         scene.addGeometry(sphere);
 
@@ -49,7 +49,7 @@ public class ShadowTests {
         ImageWriter imageWriter = new ImageWriter("Spot test with shadow", 500, 500, 500, 500);
 
         Render render = new Render(imageWriter, scene);
-        render.renderImage();
+        render.renderImage(true);
     }
 
     @Test
@@ -60,7 +60,7 @@ public class ShadowTests {
         scene.setCameraAndDistance(new Camera(), 200);
 
         Sphere sphere = new Sphere(500, new Point3D(0.0, 0.0, -1000));
-        sphere.setMaterial(new Material(1, 1, 1, 1, 20));
+        sphere.setMaterial(new Material(1, 1, 0, 0, 20));
         sphere.setEmission(new Color(0, 0, 100));
         scene.addGeometry(sphere);
 
@@ -81,7 +81,7 @@ public class ShadowTests {
         ImageWriter imageWriter = new ImageWriter("Spot test with shadow2", 500, 500, 500, 500);
 
         Render render = new Render(imageWriter, scene);
-        render.renderImage();
+        render.renderImage(true);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class ShadowTests {
         scene.setCameraAndDistance(new Camera(), 200);
 
         Sphere sphere = new Sphere(500, new Point3D(0.0, 0.0, -1000));
-        sphere.setMaterial(new Material(1, 1, 1, 1, 20));
+        sphere.setMaterial(new Material(1, 1, 0, 0, 20));
         sphere.setEmission(new Color(0, 0, 100));
         scene.addGeometry(sphere);
 
@@ -113,6 +113,6 @@ public class ShadowTests {
         ImageWriter imageWriter = new ImageWriter("Point test with shadow", 500, 500, 500, 500);
 
         Render render = new Render(imageWriter, scene);
-        render.renderImage();
+        render.renderImage(true);
     }
 }

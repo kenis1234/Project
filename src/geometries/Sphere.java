@@ -2,10 +2,12 @@
 
 package geometries;
 
+import primitives.Material;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,8 @@ public class Sphere extends RadialGeometry{
     public Sphere(double radius, Point3D point) {
         super(radius);
         this.center = point;
+        emission=new Color(0,0,0);
+        material=new Material();
     }                                    //constructor that gets radius and the center
 
 

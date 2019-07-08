@@ -73,6 +73,6 @@ public class OurTest {
 
         Render render = new Render(imageWriter, scene);
 
-        render.renderImage();
+        render.renderImage(true);
     }
 }

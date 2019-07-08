@@ -41,7 +41,7 @@ public class RecursiveTests {
 
         Render render = new Render(imageWriter, scene);
 
-        render.renderImage();
+        render.renderImage(true);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class RecursiveTests {
 
         Render render = new Render(imageWriter, scene);
 
-        render.renderImage();
+        render.renderImage(true);
     }
 
 }

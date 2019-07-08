@@ -34,7 +34,7 @@ public class ShmuelTest {
 
         ImageWriter i=new ImageWriter("kjsh",500,500,500,500);
         Render r=new Render(i,scene);
-        r.renderImage();
+        r.renderImage(true);
 
     }
 }

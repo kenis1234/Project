@@ -1,11 +1,14 @@
 //Bs"d
 package geometries;
 
+import primitives.Material;
 import primitives.Point3D;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class Plane extends Geometry implements FlatGeometry {
     private Point3D point;
@@ -21,6 +24,8 @@ public class Plane extends Geometry implements FlatGeometry {
     public Plane(Point3D point, Vector plumb) {
         this.point = point;
         this.plumb = plumb;
+        emission=new Color(0,0,0);
+        material=new Material();
     }                      // Constructor that initializing the plane by point and the plumb vector
 
     /**

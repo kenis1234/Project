@@ -43,8 +43,12 @@ public class Render {
     /**
      *defines if render image without super sumpling or with
      */
-    public void renderImage(){
-        renderImageWithoutSuperSumpling();
+    public void renderImage(boolean superSumpling)
+    {
+        if (superSumpling)
+            renderImageWithSuperSumpling();
+        else
+            renderImageWithoutSuperSumpling();
     }
 
     /**
